@@ -1,0 +1,13 @@
+mat-toolbar {
+    position: sticky;
+    top: 0;
+}
+
+.mg-r {
+    margin-right: 10px;
+}
+
+.mg-l {
+    margin-left: 10px;
+}
+
