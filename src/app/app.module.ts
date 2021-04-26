@@ -8,6 +8,9 @@ import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { MaterialModule } from './material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
     MaterialModule,
+    AuthModule,
     HomeModule,
     SharedModule,
     FlexLayoutModule
