@@ -6,12 +6,14 @@ mat-card{
     margin-right:auto;  
 }
 
-
-
 mat-form-field {
     width: 100%;
 }
 
 mat-card-actions {
     text-align: center;
+}
+
+.field-error {
+    color:  red;
 }

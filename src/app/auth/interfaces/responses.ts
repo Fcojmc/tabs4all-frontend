@@ -1,4 +1,4 @@
-export interface AuthResponse {
+export interface LoginResponse {
     status:     string;
     message:    string;
     data: null | { 
@@ -6,3 +6,14 @@ export interface AuthResponse {
     }
 }
 
+export interface RegisterResponse {
+    status:     string;
+    message:    string;
+    data: null | any;
+}
+
+export interface RegisterErrors {
+    email?:     string[];
+    password?:  string[];
+    name?:      string[];
+}

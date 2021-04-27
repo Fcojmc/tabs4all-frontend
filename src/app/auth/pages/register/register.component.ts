@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { User } from '../../interfaces/user';
+import { RegisterErrors } from '../../interfaces/responses';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,7 +14,11 @@ export class RegisterComponent implements OnInit {
 
   error: boolean = false;
 
-  errorMsg!: string;
+  errors!: RegisterErrors;
+
+  errorName!: string;
+
+  errorEmail!: string;
 
   errorPwd!: string;
 
@@ -25,13 +30,13 @@ export class RegisterComponent implements OnInit {
               private formBuilder: FormBuilder,
               private router: Router) { }
 
-  ngOnInit(): void {
-    this.registerForm = this.formBuilder.group([
+  ngOnInit() {
+    this.registerForm = this.formBuilder.group({
       name: [null, Validators.required],
       email: [null, Validators.required],
-      password: [null, Validators.required, Validators.minLength(6)],
-      password_confirmation: [null, Validators.required, Validators.minLength(6)]
-    ]);
+      password: [null, Validators.required],
+      password_confirmation: [null, Validators.required]
+    });
   }
 
 
@@ -42,10 +47,27 @@ export class RegisterComponent implements OnInit {
 
     this.newUser = this.registerForm.value;
 
-    if (this.newUser.password_confirmation != this.newUser.password) {
-      this.errorPwd = 'Password must be identical';
-    }
+    this.authService.register(this.newUser)
+      .subscribe(
+        res => {
+          console.log(res)
+          this.router.navigate(['/auth/login']);
+        },
+        error => {
+          if (error.error.data) {
+            this.errors = error.error.data;
+          }
 
-    
+          if (this.errors.email) {
+            this.errorEmail = this.errors.email[0];
+          }
+
+          if (this.errors.password) {
+            this.errorPwd = this.errors.password[0];
+          }
+        
+          this.error = true;
+        }
+      );
   }
 }

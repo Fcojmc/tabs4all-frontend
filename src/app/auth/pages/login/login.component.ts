@@ -21,7 +21,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private formBuilder: FormBuilder,
-              private router: Router) { }
+              private router: Router) { 
+
+     
+  }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -44,6 +47,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/profile']);
         },
         error => {
+          console.log(error)
           this.error = true;
           this.errorMsg = error.error.message;
     });

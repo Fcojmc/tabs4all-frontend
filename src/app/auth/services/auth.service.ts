@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Login } from '../interfaces/login';
 import { User } from '../interfaces/user';
-import { AuthResponse } from '../interfaces/responses';
+import { LoginResponse, RegisterResponse } from '../interfaces/responses';
 import { tap, map, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -16,12 +16,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  register(register: User): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/auth/register`, register);
+  register(register: User): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${this.baseUrl}/auth/register`, register);
   }
 
-  login(login: Login): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/auth/login`, login)
+  login(login: Login): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.baseUrl}/auth/login`, login)
     .pipe(
       tap(resp => {
         if (resp.status === "Success") {
@@ -33,20 +33,17 @@ export class AuthService {
 
   getUserInfo(): Observable<User> {
     const url = `${this.baseUrl}/my-info`;
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
-    });
+    return this.http.get<User>(url);
+  }
 
-    return this.http.get<User>(url, {headers})
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
   validateToken(): Observable<boolean> {
     const url = `${this.baseUrl}/auth/check`;
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
-    });
     
-    return this.http.get<any>(url, { headers })
+    return this.http.get<any>(url)
       .pipe(
         map( res => {
           return true;

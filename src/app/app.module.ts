@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { ValidateTokenGuard } from './guards/validate-token.guard';
+import { interceptorProvider } from './interceptors/token-interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,10 @@ import { ValidateTokenGuard } from './guards/validate-token.guard';
     SharedModule,
     FlexLayoutModule
   ],
-  providers: [ ValidateTokenGuard ],
+  providers: [ 
+    ValidateTokenGuard,
+    interceptorProvider 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

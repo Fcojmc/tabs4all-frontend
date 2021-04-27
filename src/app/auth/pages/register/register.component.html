@@ -26,18 +26,22 @@
                 </mat-error>       
             </mat-form-field>
     
+            <small *ngIf="error && errorEmail" class="field-error">{{errorEmail}}</small>
+
             <mat-form-field>
                 <mat-label>Password</mat-label>
                 <input matInput 
                        type="password"
                        placeholder="Password" 
-                       formControlName="password"
+                       formControlName = "password"
                        required>
                 <mat-error>
                     <span>This field is mandatory.</span>
                 </mat-error>
             </mat-form-field>
-    
+            
+            <small *ngIf="error && errorPwd" class="field-error">{{errorPwd}}</small> 
+
             <mat-form-field>
                 <mat-label>Password Confirmation</mat-label> 
                 <input matInput 
@@ -49,10 +53,12 @@
                     <span>This field is mandatory.</span>
                 </mat-error>       
             </mat-form-field>
+
+            <small *ngIf="error && errorPwd" class="field-error">{{errorPwd}}</small>
         </mat-card-content>
     
         <mat-card-actions>
-          <button mat-raised-button color="primary" (click)="register()">Submit</button>
+          <button mat-raised-button color="primary">Submit</button>
         </mat-card-actions>
     </mat-card>
 </form>
