@@ -5,7 +5,7 @@
         </button>
     </div>
     <div>
-        <span (click)="goToRoute('home')">Tabs4All</span>
+        <span (click)="info()">Tabs4All</span>
     </div>
 
     <div fxFlex fxLayout fxLayoutAlign="start" fxHide.xs>
@@ -23,7 +23,7 @@
         </button>
     </div>
 
-    <div fxFlex fxLayout fxLayoutAlign="end">
+    <div fxFlex fxLayout fxLayoutAlign="end" *ngIf="!isLogged;else logged">
         <button mat-raised-button class="mg-r" (click)="goToRoute('auth/register')">
             Sign in
         </button>
@@ -31,4 +31,11 @@
             Log in
         </button>
     </div>
+
+
+    <ng-template #logged>
+        <button mat-raised-button class="mg-r" (click)="logout()" (click)="goToRoute('home')">
+            Logout
+        </button>
+    </ng-template>
 </mat-toolbar>   

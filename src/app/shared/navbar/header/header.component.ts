@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,11 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  @Input() isLogged!: boolean;
   @Output() sidenavToggle = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -21,5 +24,15 @@ export class HeaderComponent implements OnInit {
 
   goToRoute(route: string) {
     this.router.navigate([`/${route}`]);
+  }
+
+  logout() {
+    this.isLogged = false;
+    this.authService.logout();
+  }
+
+  info() {
+    this.authService.isAdmin()
+      .subscribe(res => console.log(res));
   }
 }

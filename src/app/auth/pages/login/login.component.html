@@ -2,7 +2,7 @@
     <mat-card>
         <mat-card-content>
             <h2 style="text-align: center;">Log In</h2>
-            <mat-form-field>
+            <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input matInput 
                        placeholder="Email" 
@@ -17,7 +17,7 @@
             
             <small *ngIf="error" class="field-error">{{errorMsg}}</small>
     
-            <mat-form-field>
+            <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
                 <input matInput 
                        type="password" 

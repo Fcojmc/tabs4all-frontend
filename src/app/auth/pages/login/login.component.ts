@@ -1,3 +1,4 @@
+import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,6 +11,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  @Output() isLogged = new EventEmitter();
 
   error: boolean = false;
 
@@ -44,6 +47,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginUser)
       .subscribe(
         res => {
+          this.isLogged.emit(true);
           this.router.navigate(['/profile']);
         },
         error => {

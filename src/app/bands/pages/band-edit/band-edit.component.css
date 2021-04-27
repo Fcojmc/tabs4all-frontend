@@ -1,0 +1,34 @@
+
+.edit-box {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    background-color: #212121;
+}
+
+
+.title > h2 {
+    margin-top: 15px;
+}
+
+.content {
+    background-color: grey;
+    padding: 30px;
+    color: black;
+}
+
+
+img {
+    height: 250px; 
+    width: 250px; 
+    object-fit: cover;
+}
+
+@media (max-width: 959px) {
+    .image-box {
+        margin-top: 20px;
+    }
+} 

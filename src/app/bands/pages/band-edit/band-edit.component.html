@@ -1,0 +1,49 @@
+<div fxLayout.gt-sm="row">
+    <div fxFlex.gt-sm="80" fxFlex="100" fxLayout.xs="column" class="edit-box">
+        <div fxLayout="row" fxLayoutAlign="center" class="title">
+            <h2>Edit Band</h2>
+        </div>
+        <div fxLayout.gt-sm="row" fxLayout="column" class="content">
+            <div fxFlex.gt-sm="60" fxFlex="100" fxLayout="column">
+                <div fxLayout="column" fxLayoutGap="25px" id="first">
+                    <mat-form-field appearance="fill">
+                    <input matInput
+                       type="text"
+                       placeholder="Name"
+                       >
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <input matInput
+                        type="text"
+                        placeholder="YouTube Url"
+                        >
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <input matInput
+                        type="text"
+                        placeholder="Image name"
+                        disabled>
+                    </mat-form-field>
+
+                    <div fxLayoutAlign="center">
+                        <button mat-raised-button color="primary">Update</button>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="40" fxFlex="100" fxLayout="column"  fxLayoutAlign="center center" class="image-box">
+                <div fxLayout="column">
+                    <div>
+                        <img [src]="image">
+                    </div>
+                    <button mat-raised-button (click)="selectFile.click()">Select image</button>
+                    <input type="file" (change)="getImage($event)" style="display: none" #selectFile>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

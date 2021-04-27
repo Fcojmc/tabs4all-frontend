@@ -31,9 +31,27 @@ export class AuthService {
     );
   }
 
+  logout() {
+    localStorage.clear();
+  }
+
   getUserInfo(): Observable<User> {
     const url = `${this.baseUrl}/my-info`;
     return this.http.get<User>(url);
+  }
+
+  isAdmin(): Observable<boolean | any> {
+    const url = `${this.baseUrl}/my-info`;
+    return this.http.get<boolean | any>(url)
+      .pipe(
+        map( res => {
+          if (res.is_admin === 1) {
+            return true;
+          }
+          return false;
+        })
+      );
+      
   }
 
   getToken(): string | null {

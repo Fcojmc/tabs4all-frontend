@@ -23,7 +23,9 @@ const routes: Routes = [
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsModule),
+    canActivate: [ ValidateTokenGuard ],
+    canLoad: [ ValidateTokenGuard ]
   },
   {
     path: '**',
