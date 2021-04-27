@@ -9,6 +9,7 @@ import { BandsRoutingModule } from './bands-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
 import { BandEditComponent } from './pages/band-edit/band-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -23,7 +24,8 @@ import { BandEditComponent } from './pages/band-edit/band-edit.component';
     CommonModule,
     BandsRoutingModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class BandsModule { }

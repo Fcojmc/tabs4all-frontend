@@ -4,6 +4,7 @@ import { ListComponent } from './pages/list/list.component';
 import { CreateComponent } from './pages/create/create.component';
 import { TabViewComponent } from './pages/tab-view/tab-view.component';
 import { TabsRoutingModule } from './tabs-routing.module';
+import { EditComponent } from './pages/edit/edit.component';
 
 
 
@@ -11,7 +12,8 @@ import { TabsRoutingModule } from './tabs-routing.module';
   declarations: [
     ListComponent,
     CreateComponent,
-    TabViewComponent
+    TabViewComponent,
+    EditComponent
   ],
   imports: [
     CommonModule,

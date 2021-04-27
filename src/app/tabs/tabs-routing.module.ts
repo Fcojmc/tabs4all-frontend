@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './pages/list/list.component';
 import { CreateComponent } from './pages/create/create.component';
 import { TabViewComponent } from './pages/tab-view/tab-view.component';
+import { EditComponent } from './pages/edit/edit.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
     children: [
       { path: 'list', component: ListComponent },
       { path: 'create', component: CreateComponent },
-      { path: 'edit', component: TabViewComponent },
+      { path: 'edit', component: EditComponent },
+      { path: ':name', component: TabViewComponent },
       { path: '**', redirectTo: 'list'}
     ]
   }

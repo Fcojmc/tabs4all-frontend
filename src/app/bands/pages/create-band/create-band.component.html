@@ -1,0 +1,47 @@
+<div fxLayout="row">
+    <div fxFlex.gt-sm="80" fxFlex="100" class="title-box">
+        <div fxLayout="row" fxLayoutAlign="center" class="title">
+            <h2>Create Band</h2>
+        </div>
+
+        <div fxLayout="column" class="content-box">
+            <form [formGroup]="createForm" (submit)="createBand()">
+                <div fxFlex="100" fxLayout="column">
+                    <div fxLayout="column" fxLayoutGap="25px">
+                        <mat-form-field appearance="fill">
+                        <input matInput
+                           type="text"
+                           placeholder="Name"
+                           formControlName="name"
+                           required>
+                        </mat-form-field>
+                        
+                        <small *ngIf="error && errorName" class="field-error">{{errorName}}</small>
+
+                        <mat-form-field appearance="fill">
+                            <input matInput
+                            type="text"
+                            placeholder="YouTube Url"
+                            formControlName="url_yt"
+                            >
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="fill">
+                            <input matInput
+                            type="text"
+                            placeholder="Image"
+                            formControlName="image"
+                            [(ngModel)]="image"
+                            (click)="selectImage.click()"
+                            >
+                            <input type="file" (change)="getImage($event)" style="display: none" #selectImage>
+                        </mat-form-field>
+                        <div fxLayout="row" fxLayoutAlign="center">
+                            <button mat-raised-button color="primary" class="create-btn" type="submit" >Create</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

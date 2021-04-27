@@ -14,6 +14,8 @@
                 </mat-error>
             </mat-form-field>
     
+            <small *ngIf="error && errorName" class="field-error">{{errorName}}</small>
+
             <mat-form-field appearance="fill" > 
                 <mat-label>Email</mat-label>
                 <input matInput 

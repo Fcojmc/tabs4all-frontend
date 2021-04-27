@@ -20,3 +20,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mg-i {
     margin-right: 2px;
 }
+
+
+.images {
+    height: 250px; 
+    width: 250px; 
+    object-fit: cover;
+}
+
+.content-box {
+    background-color: grey;
+    padding: 30px;
+    color: black;
+}
+
+.title-box {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    background-color: #212121;
+}

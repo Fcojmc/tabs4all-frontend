@@ -58,6 +58,10 @@ export class RegisterComponent implements OnInit {
             this.errors = error.error.data;
           }
 
+          if (this.errors.name) {
+            this.errorName = this.errors.name[0];
+          }
+
           if (this.errors.email) {
             this.errorEmail = this.errors.email[0];
           }
