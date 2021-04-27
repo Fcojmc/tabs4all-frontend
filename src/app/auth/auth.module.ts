@@ -4,7 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { MaterialModule } from '../material/material.module';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 
 
 
@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AuthRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     MaterialModule
   ]

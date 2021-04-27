@@ -1,0 +1,13 @@
+mat-card {
+    width: 700px;
+    margin-left:auto;
+    margin-right:auto; 
+}
+
+mat-card-header {
+    justify-content: center;
+}
+
+mat-card-content {
+    margin-top: 10px;
+}

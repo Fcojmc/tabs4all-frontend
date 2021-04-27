@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileRoutingModule } from './profile-routing.module';
-
+import { MaterialModule } from '../material/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { ProfileRoutingModule } from './profile-routing.module';
   ],
   imports: [
     CommonModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    MaterialModule,
+    FlexLayoutModule
   ]
 })
 export class ProfileModule { }

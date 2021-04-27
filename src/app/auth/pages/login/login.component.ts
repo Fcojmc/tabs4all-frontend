@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 import { Login } from '../../interfaces/login';
 import { AuthService } from '../../services/auth.service';
 
@@ -9,19 +11,41 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginUser: Login = {
-    email: '',
-    password: ''
-  }
+  error: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  errorMsg: string = '';
+
+  loginForm!: FormGroup;
+
+  loginUser!: Login;
+
+  constructor(private authService: AuthService,
+              private formBuilder: FormBuilder,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email: [null, Validators.required],
+      password: [null, Validators.required]
+    });
   }
 
 
   login() {
+    if (!this.loginForm.valid){
+      return;
+    }
+
+    this.loginUser = this.loginForm.value;
+
     this.authService.login(this.loginUser)
-      .subscribe(res => console.log(res));
+      .subscribe(
+        res => {
+          this.router.navigate(['/profile']);
+        },
+        error => {
+          this.error = true;
+          this.errorMsg = error.error.message;
+    });
   }
 }

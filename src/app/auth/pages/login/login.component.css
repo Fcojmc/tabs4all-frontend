@@ -12,6 +12,10 @@ mat-form-field {
     width: 100%;
 }
 
+.field-error {
+    color: red;
+}
+
 mat-card-actions {
     text-align: center;
 }
