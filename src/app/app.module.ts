@@ -13,10 +13,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { ValidateTokenGuard } from './guards/validate-token.guard';
 import { interceptorProvider } from './interceptors/token-interceptor';
+import { UserImagesPipe } from './pipes/user-images.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserImagesPipe
   ],
   imports: [
     BrowserModule,

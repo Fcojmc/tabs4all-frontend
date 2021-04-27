@@ -10,6 +10,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
 import { BandEditComponent } from './pages/band-edit/band-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BandCardComponent } from './components/band-card/band-card.component';
+import { BandImagePipe } from './pipes/band-image.pipe';
 
 
 
@@ -18,7 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListComponent,
     BandViewComponent,
     CreateBandComponent,
-    BandEditComponent
+    BandEditComponent,
+    BandCardComponent,
+    BandImagePipe
   ],
   imports: [
     CommonModule,

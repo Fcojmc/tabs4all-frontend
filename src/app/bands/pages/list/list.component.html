@@ -1,4 +1,18 @@
-<router-outlet></router-outlet>
-<div class="page-content">
-    <p>band-list works!</p>
+<h1>Band List</h1>
+<mat-divider></mat-divider>
+<br>
+
+<div fxLayout="row wrap"
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="20px">
+
+    <div fxFlex="20"
+         fxFlex.lg="15"
+         fxFlex.sm="30"
+         *ngFor="let band of bands">
+       
+        <app-band-card [band]="band"></app-band-card>
+    </div>
 </div>
+

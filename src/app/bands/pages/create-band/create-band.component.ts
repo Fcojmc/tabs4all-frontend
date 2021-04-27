@@ -55,7 +55,7 @@ export class CreateBandComponent implements OnInit {
 
     this.bandService.create(this.bandData)
       .subscribe( res => {
-        
+        this.error = false;
       },
       error => {
         this.error = true;
