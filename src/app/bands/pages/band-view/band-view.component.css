@@ -1,0 +1,21 @@
+.title {
+    background-color: #212121;
+}
+
+
+.title > h2 {
+    margin-top: 15px;
+}
+
+.btn-box {
+    margin-top: 15px;
+}
+
+.btn-mg-right {
+    margin-right: 10px;
+}
+
+.btn-mg-left {
+    margin-left: 10px;
+}
+

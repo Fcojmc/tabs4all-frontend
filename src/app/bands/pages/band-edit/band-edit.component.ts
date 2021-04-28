@@ -31,9 +31,7 @@ export class BandEditComponent implements OnInit {
     )
     .subscribe( band => {
       this.band = band;
-      console.log(band)
     } );
-    console.log(this.band)
   }
 
   getImage(event: any) {

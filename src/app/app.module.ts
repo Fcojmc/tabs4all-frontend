@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { ValidateTokenGuard } from './guards/validate-token.guard';
 import { interceptorProvider } from './interceptors/token-interceptor';
 import { UserImagesPipe } from './pipes/user-images.pipe';
+import { YouTubePlayerModule } from "@angular/youtube-player";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UserImagesPipe } from './pipes/user-images.pipe';
     AuthModule,
     HomeModule,
     SharedModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    YouTubePlayerModule
   ],
   providers: [ 
     ValidateTokenGuard,
