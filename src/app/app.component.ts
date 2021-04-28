@@ -7,6 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class AppComponent {
   title = 'tabs4all-frontend';
-
-  @Input() isLogged!: boolean;
 }

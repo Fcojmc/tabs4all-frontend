@@ -10,9 +10,9 @@ export class BandImagePipe implements PipeTransform {
   transform(payload: Band): string {
     const baseUrl = environment.baseUrlImage;
     
-    /* if (!payload.image) {
+    if (!payload.image) {
       return 'assets/no-image.png';
-    } */
+    }
 
     return `${baseUrl}/band-images/${payload.image}`;
   }

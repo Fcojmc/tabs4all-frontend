@@ -12,6 +12,7 @@ import { BandEditComponent } from './pages/band-edit/band-edit.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BandCardComponent } from './components/band-card/band-card.component';
 import { BandImagePipe } from './pipes/band-image.pipe';
+import { BandVideoPipe } from './pipes/band-video.pipe';
 
 
 
@@ -22,7 +23,8 @@ import { BandImagePipe } from './pipes/band-image.pipe';
     CreateBandComponent,
     BandEditComponent,
     BandCardComponent,
-    BandImagePipe
+    BandImagePipe,
+    BandVideoPipe
   ],
   imports: [
     CommonModule,
