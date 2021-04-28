@@ -13,7 +13,7 @@ import { tap, map, catchError } from 'rxjs/operators';
 export class AuthService {
 
   private baseUrl: string = environment.baseUrl;
-
+  
   constructor(private http: HttpClient) { }
 
   register(register: User): Observable<RegisterResponse> {
@@ -61,12 +61,12 @@ export class AuthService {
   validateToken(): Observable<boolean> {
     const url = `${this.baseUrl}/auth/check`;
     
-    return this.http.get<any>(url)
+    return this.http.get<boolean>(url)
       .pipe(
         map( res => {
           return true;
         }),
-        catchError(err => of(false))
+        catchError((err)=> of(err.ok)) 
       );
   }
 }

@@ -1,10 +1,10 @@
-<div fxLayout.gt-sm="row" > 
-    <div fxFlex.gt-sm="80" fxFlex="100" fxLayout="column" class="title-box">
+<div fxLayout.gt-xs="row" > 
+    <div fxFlex="80" fxFlex.md="90" fxFlex.xs="100" fxFlex.sm="100" fxLayout="column" class="title-box">
         <div fxFlex="100" fxLayoutAlign="center" class="title">
             <h2>{{band.name}}</h2>
         </div>
-        <div fxLayout.gt-sm="row" fxLayout="column" fxFlex="100" class="content-box">
-            <div fxLayout="column"  fxFlex.gt-sm="60" fxFlex="100" style="border: solid red 5px;">
+        <div fxLayout.gt-xs="row" fxLayout="column" fxFlex="100" class="content-box">
+            <div fxLayout="column" fxFlex.xs="60" fxFlex.sm="50" fxFlex="100" style="border: solid red 5px;">
                 <ul>
                     <li>LINK</li>
                     <li>LINK</li>
@@ -21,8 +21,9 @@
                 </ul>               
             </div>
 
-            <div fxLayout="column"  fxFlex.gt-sm="40" fxFlex="100" style="border:solid black 5px">
+            <div fxLayout="column"  fxFlex.xs="40" fxFlex.sm="50" fxFlex="100" style="border:solid black 5px">
                 <iframe [src]="band | bandVideo" height="300px" frameborder="0" allowfullscreen></iframe>
+                
                 <div fxLayoutAlign="center" class="btn-box">
                     <button mat-icon-button color="warn" class="btn-mg-right">
                         <mat-icon>favorite</mat-icon>
