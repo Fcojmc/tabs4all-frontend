@@ -9,7 +9,7 @@ import { BandsRoutingModule } from './bands-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
 import { BandEditComponent } from './pages/band-edit/band-edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BandCardComponent } from './components/band-card/band-card.component';
 import { BandImagePipe } from './pipes/band-image.pipe';
 
@@ -29,7 +29,8 @@ import { BandImagePipe } from './pipes/band-image.pipe';
     BandsRoutingModule,
     FlexLayoutModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class BandsModule { }

@@ -8,6 +8,13 @@
     margin-top: 15px;
 }
 
+.btn-mg-right {
+    margin-right: 10px;
+}
+
+.btn-mg-left {
+    margin-left: 10px;
+}
 
 @media (max-width: 959px) {
     .images {

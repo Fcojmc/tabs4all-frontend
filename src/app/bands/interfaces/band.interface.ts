@@ -3,6 +3,6 @@ export interface Band {
     name:       string;
     image?:        any;
     url_yt:     string;
-    created_at?:  Date;
-    updated_at?:  Date;
+    created_at?:  any;
+    updated_at?:  any;
 }

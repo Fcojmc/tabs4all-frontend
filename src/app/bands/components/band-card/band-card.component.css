@@ -1,3 +1,14 @@
 img {
     object-fit: cover;
 }
+
+.caja:hover {
+    transform: scale(1.05, 1.05);
+    transform: 2s;
+}
+
+
+mat-card {
+    margin-top: 20px;
+    
+}

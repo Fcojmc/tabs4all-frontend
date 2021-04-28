@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BandsService } from '../../services/bands.service';
 import { Band } from '../../interfaces/band.interface';
 
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -22,3 +23,4 @@ export class ListComponent implements OnInit {
   }
 
 }
+

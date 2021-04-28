@@ -5,7 +5,7 @@
 
     <mat-sidenav-content>
         <app-header [isLogged]="isLogged" (sidenavToggle)="sidenav.toggle()"></app-header>
-        <div class="back-img">
+        <div class="back-img" style="overflow:auto">
             <router-outlet ></router-outlet>
         </div>
     </mat-sidenav-content>

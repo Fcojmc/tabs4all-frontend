@@ -12,8 +12,8 @@ const routes: Routes = [
     children: [
       { path: 'list', component: ListComponent},
       { path: 'create', component: CreateBandComponent, canActivate: [AdminGuard], canLoad: [AdminGuard] },
-      { path: 'edit', component: BandEditComponent, canActivate: [AdminGuard], canLoad: [AdminGuard] },
-      { path: ':name', component: BandViewComponent },
+      { path: 'edit/:id', component: BandEditComponent, canActivate: [AdminGuard], canLoad: [AdminGuard] },
+      { path: ':id', component: BandViewComponent },
       { path: '**', redirectTo: 'list' }
     ]
   }

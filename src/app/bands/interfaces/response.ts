@@ -1,4 +1,5 @@
 import { Band } from './band.interface';
+
 export interface BandCreateResponse {
     data:   null | any;
     message:    string;

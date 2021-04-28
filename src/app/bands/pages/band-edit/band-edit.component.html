@@ -9,26 +9,30 @@
                     <mat-form-field appearance="fill">
                     <input matInput
                        type="text"
-                       placeholder="Name"
+                       [placeholder]="band.name"
+                       [(ngModel)]="band.name"
                        >
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
                         <input matInput
                         type="text"
-                        placeholder="YouTube Url"
+                        [placeholder]="band.url_yt"
+                        [(ngModel)]="band.url_yt"
                         >
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
                         <input matInput
                         type="text"
-                        placeholder="Image name"
+                        [placeholder]="band.image"
+                        [(ngModel)]="imageName"
                         disabled>
                     </mat-form-field>
 
                     <div fxLayoutAlign="center">
-                        <button mat-raised-button color="primary">Update</button>
+                        <button mat-raised-button color="primary" (click)="updateBand()" class="btn-mg-right">Update</button>
+                        <button mat-raised-button color="warn" (click)="deleteBand()" class="btn-mg-left">Delete</button>
                     </div>
                     
                 </div>
@@ -37,9 +41,10 @@
             <div fxFlex.gt-sm="40" fxFlex="100" fxLayout="column"  fxLayoutAlign="center center">
                 <div fxLayout="column">
                     <div>
-                        <img [src]="image" class="images">
+                        <img [src]="band| bandImage" class="images">
                     </div>
-                    <button mat-raised-button (click)="selectFile.click()">Select image</button>
+                    <small>Created: {{band.created_at | date}}</small>
+                    <button mat-raised-button (click)="selectFile.click()">Change image</button>
                     <input type="file" (change)="getImage($event)" style="display: none" #selectFile>
                 </div>
             </div>
