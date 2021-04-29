@@ -2,10 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Login } from '../interfaces/login';
-import { User } from '../interfaces/user';
-import { LoginResponse, RegisterResponse } from '../interfaces/responses';
+import { Login, LoginResponse } from '../../interfaces/login.interfaces';
+import { User } from '../../interfaces/user.interface';
+import { SuccessResponse } from '../../interfaces/success-response.interface';
 import { tap, map, catchError } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class AuthService {
   
   constructor(private http: HttpClient) { }
 
-  register(register: User): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${this.baseUrl}/auth/register`, register);
+  register(register: User): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${this.baseUrl}/auth/register`, register);
   }
 
   login(login: Login): Observable<LoginResponse> {

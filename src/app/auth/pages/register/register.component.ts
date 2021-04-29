@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { User } from '../../interfaces/user';
-import { RegisterErrors } from '../../interfaces/responses';
+import { User } from '../../../interfaces/user.interface';
 import { AuthService } from '../../services/auth.service';
+import { FormErrors } from '../../../interfaces/form-errors.interface';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   error: boolean = false;
 
-  errors!: RegisterErrors;
+  errors!: FormErrors;
 
   errorName!: string;
 

@@ -13,13 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { ValidateTokenGuard } from './guards/validate-token.guard';
 import { interceptorProvider } from './interceptors/token-interceptor';
-import { UserImagesPipe } from './pipes/user-images.pipe';
-import { YouTubePlayerModule } from "@angular/youtube-player";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UserImagesPipe
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +28,7 @@ import { YouTubePlayerModule } from "@angular/youtube-player";
     AuthModule,
     HomeModule,
     SharedModule,
-    FlexLayoutModule,
-    YouTubePlayerModule
+    FlexLayoutModule
   ],
   providers: [ 
     ValidateTokenGuard,

@@ -1,19 +1,30 @@
-<router-outlet></router-outlet>
-<h1>Band List</h1>
-<mat-divider></mat-divider>
-<br>
-
-<div fxLayout="row wrap"
-     fxLayout.xs="column"
-     fxLayoutAlign="center"
-     fxLayoutGap="20px">
-
-    <div fxFlex="20"
-         fxFlex.lg="15"
-         fxFlex.sm="30"
-         *ngFor="let band of bands">
-       
-        <app-band-card [band]="band" class="caja"></app-band-card>
+<div fxLayout="row"> 
+    <div fxFlex="80" fxFlex.md="90" fxFlex.xs="100" fxFlex.sm="100" fxLayout="column" class="title-box">
+        <div fxLayoutAlign="center" class="create-btn">
+            <button mat-raised-button 
+                    color="primary" 
+                    routerLink="/bands/create"
+                    *ngIf="isAdmin">
+                    Create
+            </button>
+        </div>
+        <div fxFlex="100" fxLayoutAlign="center" class="title">
+            <h2>Bands</h2>
+        </div>
+        <div fxLayout="row wrap"
+        fxLayout.xs="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="20px"
+        class="content-box"
+        style="margin-bottom: 40px;">
+            
+            <div
+                fxFlex="20"
+                fxFlex.lg="20"
+                fxFlex.sm="40"
+                *ngFor="let band of bands">
+            
+                <app-band-card [band]="band" class="caja"></app-band-card>
+            </div>
     </div>
 </div>
-

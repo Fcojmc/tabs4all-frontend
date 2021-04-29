@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { User } from '../auth/interfaces/user';
+import { User } from '../interfaces/user.interface';
 
 @Pipe({
   name: 'userImages'

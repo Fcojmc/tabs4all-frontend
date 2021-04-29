@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TabsService } from '../../services/tabs.service';
 
 @Component({
   selector: 'app-list',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tabsService: TabsService) { }
 
   ngOnInit(): void {
+    this.tabsService.getTabs().subscribe(res => console.log(res))
   }
 
 }

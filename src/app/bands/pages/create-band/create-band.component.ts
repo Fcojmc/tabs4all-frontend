@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Band } from '../../interfaces/band.interface';
+import { Band } from '../../../interfaces/band.interface';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { BandsService } from '../../services/bands.service';
-import { BandErrorResponse } from '../../interfaces/response';
+import { FormErrors } from '../../../interfaces/form-errors.interface';
 
 @Component({
   selector: 'app-create-band',
@@ -21,7 +21,7 @@ export class CreateBandComponent implements OnInit {
 
   error: boolean = false;
 
-  errors!: BandErrorResponse;  
+  errors!: FormErrors;  
 
   errorName!: string;
 

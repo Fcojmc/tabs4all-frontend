@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Band } from '../../interfaces/band.interface';
+import { Band } from '../../../interfaces/band.interface';
 
 @Component({
   selector: 'app-band-card',

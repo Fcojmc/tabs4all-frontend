@@ -11,8 +11,7 @@ import { MaterialModule } from '../material/material.module';
 import { BandEditComponent } from './pages/band-edit/band-edit.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BandCardComponent } from './components/band-card/band-card.component';
-import { BandImagePipe } from './pipes/band-image.pipe';
-import { BandVideoPipe } from './pipes/band-video.pipe';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -22,9 +21,7 @@ import { BandVideoPipe } from './pipes/band-video.pipe';
     BandViewComponent,
     CreateBandComponent,
     BandEditComponent,
-    BandCardComponent,
-    BandImagePipe,
-    BandVideoPipe
+    BandCardComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +29,8 @@ import { BandVideoPipe } from './pipes/band-video.pipe';
     FlexLayoutModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PipesModule
   ]
 })
 export class BandsModule { }

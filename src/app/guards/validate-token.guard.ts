@@ -13,7 +13,6 @@ export class ValidateTokenGuard implements CanActivate, CanLoad {
                private router: Router ) { }
   
   canActivate(): Observable<boolean> | boolean {
-   
     return this.authService.validateToken()
             .pipe(
               tap(valid => {

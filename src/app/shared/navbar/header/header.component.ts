@@ -9,7 +9,6 @@ import { AuthService } from '../../../auth/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() isLogged!: boolean;
   @Output() sidenavToggle = new EventEmitter();
 
   constructor(private router: Router,
@@ -27,12 +26,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.isLogged = false;
     this.authService.logout();
-  }
-
-  info() {
-    this.authService.isAdmin()
-      .subscribe(res => console.log(res));
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Band } from '../../interfaces/band.interface';
+import { Band } from '../../../interfaces/band.interface';
 import { BandsService } from '../../services/bands.service';
 
 

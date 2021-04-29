@@ -9,27 +9,33 @@
                 <div fxFlex="100" fxLayout="column">
                     <div fxLayout="column" fxLayoutGap="25px">
                         <mat-form-field appearance="fill">
-                        <input matInput
-                           type="text"
-                           placeholder="Name"
-                           formControlName="name"
-                           required>
+                            <mat-label>Name</mat-label>
+                            <input matInput
+                            type="text"
+                            placeholder="Band name"
+                            formControlName="name"
+                            required>
+                            <mat-error>
+                                <span>This field is mandatory.</span>
+                            </mat-error>
                         </mat-form-field>
                         
                         <small *ngIf="error && errorName" class="field-error">{{errorName}}</small>
 
                         <mat-form-field appearance="fill">
+                            <mat-label>Youtbe Url</mat-label>
                             <input matInput
                             type="text"
-                            placeholder="YouTube Url"
+                            placeholder="Insert url"
                             formControlName="url_yt"
                             >
                         </mat-form-field>
     
                         <mat-form-field appearance="fill">
+                            <mat-label>Image</mat-label>
                             <input matInput
                             type="text"
-                            placeholder="Image"
+                            placeholder="Select image"
                             formControlName="image"
                             [(ngModel)]="image"
                             (click)="selectImage.click()"

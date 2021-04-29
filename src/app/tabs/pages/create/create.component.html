@@ -1,1 +1,57 @@
-<p>create works!</p>
+<div fxLayout="row">
+    <div fxFlex.gt-sm="50" fxFlex="100" class="title-box">
+        <div fxLayout="row" fxLayoutAlign="center" class="title">
+            <h2>Create Tab</h2>
+        </div>
+
+        <div fxLayout="column" class="content-box" style="margin-bottom: 50px;">
+            <form [formGroup]="createForm" (submit)="createTab()">
+                <div fxFlex="100" fxLayout="column">
+                    <div fxLayout="column" fxLayoutGap="25px">
+                        <mat-form-field appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput
+                           type="text"
+                           placeholder="Tab name"
+                           formControlName="name"
+                           required>
+                        <mat-error>
+                            <span>This field is mandatory.</span>
+                        </mat-error>
+                        </mat-form-field>
+                        
+                        <small *ngIf="error && errorName" class="field-error">{{errorName}}</small>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Tab Content</mat-label>
+                            <textarea 
+                            style="font-family: monospace; white-space: nowrap; overflow-x: auto;"
+                            matInput
+                            type="text"
+                            formControlName="content"
+                            required>
+                            </textarea>
+                            <mat-error>
+                                <span>This field is mandatory.</span>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Youtube Url</mat-label>
+                            <input matInput
+                            type="text"
+                            placeholder="Insert url"
+                            formControlName="url_yt"
+                            >
+                        </mat-form-field>
+    
+                        <div fxLayout="row" fxLayoutAlign="center">
+                            <button mat-raised-button color="primary" class="create-btn" type="submit" >Create</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

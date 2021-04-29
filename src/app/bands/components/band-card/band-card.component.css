@@ -1,4 +1,4 @@
-img {
+.band-img {
     object-fit: cover;
 }
 
@@ -10,5 +10,4 @@ img {
 
 mat-card {
     margin-top: 20px;
-    
 }
