@@ -14,7 +14,6 @@ import { BandCardComponent } from './components/band-card/band-card.component';
 import { PipesModule } from '../pipes/pipes.module';
 
 
-
 @NgModule({
   declarations: [
     ListComponent,

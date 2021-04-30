@@ -32,7 +32,7 @@ export class CreateComponent implements OnInit {
 
   createTab(){
     this.newTab = this.createForm.value;
-
+    console.log(this.newTab)
     this.tabsService.createTab(this.newTab)
       .subscribe(res => {
         console.log(res);

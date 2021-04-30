@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Tab } from 'src/app/interfaces/tab.interface';
 import { TabsService } from '../../services/tabs.service';
 
 @Component({
@@ -8,10 +9,12 @@ import { TabsService } from '../../services/tabs.service';
 })
 export class ListComponent implements OnInit {
 
+  tabs!: Tab[];
+
   constructor(private tabsService: TabsService) { }
 
   ngOnInit(): void {
-    this.tabsService.getTabs().subscribe(res => console.log(res))
+    this.tabsService.getTabs().subscribe(res => this.tabs = res.data);
   }
 
 }

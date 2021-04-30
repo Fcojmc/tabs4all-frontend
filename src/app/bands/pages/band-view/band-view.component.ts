@@ -39,4 +39,10 @@ export class BandViewComponent implements OnInit {
         error => this.isAdmin = false
       ); 
   }
+
+  setFavorite() {
+    setTimeout(() => { 
+      this.favorite = !this.favorite
+    }, 300);
+  } 
 }

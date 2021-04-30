@@ -7,14 +7,14 @@ import { User } from '../interfaces/user.interface';
 })
 export class UserImagesPipe implements PipeTransform {
 
-  transform(payload: User): string {
+  transform(payload: any): string {
     const baseUrl = environment.baseUrlImage;
     
     if (!payload.image) {
-      return 'assets/no-image.png';
+      return 'assets/images/no-image.png';
     }
 
-    return `${baseUrl}/storage/user-images/${payload.image}`;
+    return `${baseUrl}/user-images/${payload.image}`;
   }
 
 }

@@ -21,7 +21,8 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.bandsService.getBands()
       .subscribe(res => {
-        this.bands = res.data.bands;
+        console.log(res)
+        this.bands = res.data.bands.data;
       });
     
     this.authService.isAdmin()

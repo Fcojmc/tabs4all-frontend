@@ -26,17 +26,18 @@ export class BandEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params
-    .pipe(
-      switchMap( ({ id }) => this.bandsService.getBandById(id) )
-    )
-    .subscribe( band => {
-      this.band = band;
-    } );
+      .pipe(
+        switchMap( ({ id }) => this.bandsService.getBandById(id) )
+      )
+      .subscribe( band => {
+        this.band = band;
+      } 
+    );
   }
 
   getImage(event: any) {
     this.imageName = event.target.files[0].name;
-    this.imageFile = event.target.files[0]
+    this.imageFile = event.target.files[0];
   }
 
   updateBand() {

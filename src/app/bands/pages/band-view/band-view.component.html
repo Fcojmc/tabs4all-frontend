@@ -4,7 +4,7 @@
             <h2>{{band.name}}</h2>
         </div>
         <div fxLayout.gt-sm="row" fxLayout="column" fxFlex="100" class="content-box">
-            <div fxLayout="column"   fxFlex="60" style="border: solid red 5px;">
+            <div fxLayout="column"  fxFlex="60" style="border: solid red 5px;">
                 <ul>
                     <li>LINK</li>
                     <li>LINK</li>
@@ -25,7 +25,7 @@
                 <iframe [src]="band | youtubeVideo" height="300px" frameborder="0" allowfullscreen></iframe>
                 
                 <div fxLayoutAlign="center" class="btn-box">
-                    <button mat-icon-button class="btn-mg-right" *ngIf="favorite; else notFavorite">
+                    <button mat-icon-button class="btn-mg-right" (click)="setFavorite()" *ngIf="favorite; else notFavorite">
                         <mat-icon>favorite</mat-icon>
                     </button>
                     <button mat-raised-button 
@@ -42,7 +42,7 @@
 
 
 <ng-template #notFavorite>
-    <button mat-icon-button color="warn" class="btn-mg-right">
+    <button mat-icon-button color="primary"  (click)="setFavorite()" class="btn-mg-right">
         <mat-icon>favorite</mat-icon>
     </button>
 </ng-template>

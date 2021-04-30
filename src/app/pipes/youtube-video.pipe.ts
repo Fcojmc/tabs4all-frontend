@@ -16,7 +16,6 @@ export class YoutubeVideoPipe implements PipeTransform {
 
     payload.url_yt = payload.url_yt.substr(32, (payload.url_yt.length - 32));
     this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${payload.url_yt}`);
-    
     return this.safeUrl;
   }
 

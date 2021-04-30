@@ -1,3 +1,30 @@
-<button mat-raised-button color="primary" routerLink="/tabs/create">
-    Create tab
-</button>
+<div fxLayout="row"> 
+    <div fxFlex="80" fxFlex.md="90" fxFlex.xs="100" fxFlex.sm="90" fxLayout="column" class="title-box">
+        <div fxLayoutAlign="center" class="create-btn">
+            <button mat-raised-button 
+                    color="primary" 
+                    routerLink="/tabs/create">
+                    Create Tab
+            </button>
+        </div>
+        <div fxFlex="100" fxLayoutAlign="center" class="title">
+            <h2>Tabs</h2>
+        </div>
+        <div fxLayout="row wrap"
+             fxLayout.xs="column"
+             fxLayoutAlign="center"
+             fxLayoutGap="20px"
+             class="content-box"
+             style="margin-bottom: 40px;">
+            
+            <div
+                fxFlex="20"
+                fxFlex.lg="20"
+                fxFlex.sm="40"
+                *ngFor="let tab of tabs">
+            
+               <app-tab-card [tab]="tab"></app-tab-card> 
+            </div>
+        </div>    
+    </div>
+</div>

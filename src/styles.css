@@ -44,3 +44,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: #212121;
 }
 
+
+.card:hover {
+    transform: scale(1.05, 1.05);
+    transform: 2s;
+}
+
+@media (min-width: 959px) {
+    iframe {
+        padding-left: 15px;
+    }
+} 

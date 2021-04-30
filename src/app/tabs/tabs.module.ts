@@ -8,6 +8,8 @@ import { EditComponent } from './pages/edit/edit.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TabCardComponent } from './components/tab-card/tab-card.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -16,7 +18,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ListComponent,
     CreateComponent,
     TabViewComponent,
-    EditComponent
+    EditComponent,
+    TabCardComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +27,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    PipesModule
   ]
 })
 export class TabsModule { }

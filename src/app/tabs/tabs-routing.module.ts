@@ -11,8 +11,8 @@ const routes: Routes = [
     children: [
       { path: 'list', component: ListComponent },
       { path: 'create', component: CreateComponent },
-      { path: 'edit', component: EditComponent },
-      { path: ':name', component: TabViewComponent },
+      { path: 'edit/:id', component: EditComponent },
+      { path: ':id', component: TabViewComponent },
       { path: '**', redirectTo: 'list'}
     ]
   }

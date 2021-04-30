@@ -22,4 +22,16 @@ export class TabsService {
   getTabs(): Observable<SuccessResponse> {
     return this.http.get<SuccessResponse>(`${this.baseUrl}/tabs/all`);
   }
+
+  getTabById(id: string): Observable<SuccessResponse> {
+    return this.http.get<SuccessResponse>(`${this.baseUrl}/tabs/${id}`);
+  }
+
+  updateTab(tab: Tab): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${this.baseUrl}/tabs/update`, tab);
+  }
+
+  deleteTab(id: string): Observable<SuccessResponse> {
+    return this.http.delete<SuccessResponse>(`${this.baseUrl}/tabs/delete/${id}`);
+  }
 }

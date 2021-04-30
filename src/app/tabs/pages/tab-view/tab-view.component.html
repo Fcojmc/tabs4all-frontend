@@ -1,1 +1,45 @@
-<p>tab-view works!</p>
+<div fxLayout.gt-xs="row" > 
+    <div fxFlex="80" fxFlex.md="90" fxFlex.xs="100" fxFlex.sm="100" fxLayout="column" class="title-box">
+        <div fxFlex="100" fxLayoutAlign="center" class="title">
+            <h2>{{tab.name}}</h2>
+        </div>
+        <div fxLayout.gt-sm="row" fxLayout="column" fxFlex="100" class="content-box">
+            <div fxLayout="column"  fxFlex="60">
+                <mat-form-field appearance="fill">
+                    <mat-label>Tab Content</mat-label>
+                    <textarea 
+                        multi-line
+                        class="tab-area"
+                        matInput
+                        type="text"
+                        [(ngModel)]="tab.content"
+                        >
+                    </textarea>
+                </mat-form-field>          
+            </div>
+
+            <div fxLayout="column"  fxFlex="40">
+                <iframe [src]="tab | youtubeVideo" height="300px" frameborder="0" allowfullscreen></iframe>
+                
+                <div fxLayoutAlign="center" class="btn-box">
+                    <button mat-icon-button class="btn-mg-right" (click)="setFavorite()" *ngIf="favorite; else notFavorite">
+                        <mat-icon>favorite</mat-icon>
+                    </button>
+                    <button mat-raised-button 
+                            class="btn-mh-left" 
+                            [routerLink]="['/tabs/edit', tab.id ]"
+                            *ngIf="isAuthor">
+                            Edit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #notFavorite>
+    <button mat-icon-button color="primary"  (click)="setFavorite()" class="btn-mg-right">
+        <mat-icon>favorite</mat-icon>
+    </button>
+</ng-template>
