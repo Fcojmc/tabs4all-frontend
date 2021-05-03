@@ -3,6 +3,7 @@ import { Band } from '../../../interfaces/band.interface';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { BandsService } from '../../services/bands.service';
 import { FormErrors } from '../../../interfaces/form-errors.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-band',
@@ -28,7 +29,8 @@ export class CreateBandComponent implements OnInit {
   createForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private bandService: BandsService) { }
+              private bandService: BandsService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.createForm = this.formBuilder.group({
@@ -56,6 +58,7 @@ export class CreateBandComponent implements OnInit {
     this.bandService.create(this.bandData)
       .subscribe( res => {
         this.error = false;
+        this.showSnackBar('Band created!');
       },
       error => {
         this.error = true;
@@ -67,6 +70,13 @@ export class CreateBandComponent implements OnInit {
         if (this.errors.name) {
           this.errorName = this.errors.name[0];
         }
+    });
+  }
+
+
+  showSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 2500
     });
   }
 }

@@ -5,5 +5,5 @@ export interface User {
     password:               string;
     password_confirmation?: string;
     image?:                 string;
-    is_admin?:              boolean
+    is_admin?:             boolean;
 }

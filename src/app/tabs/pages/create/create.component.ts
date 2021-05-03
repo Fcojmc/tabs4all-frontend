@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TabsService } from '../../services/tabs.service';
 import { Tab } from '../../../interfaces/tab.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create',
@@ -20,7 +21,8 @@ export class CreateComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-              private tabsService: TabsService) { }
+              private tabsService: TabsService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.createForm = this.formBuilder.group({
@@ -35,13 +37,17 @@ export class CreateComponent implements OnInit {
     console.log(this.newTab)
     this.tabsService.createTab(this.newTab)
       .subscribe(res => {
-        console.log(res);
         this.error = false;
+        this.showSnackBar('Tab created!');
       },
       error => {
-        console.log(error);
         this.error = true;
       });
   }
 
+  showSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 2500
+    });
+  }
 }

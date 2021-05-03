@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Tab } from 'src/app/interfaces/tab.interface';
 import { TabsService } from '../../services/tabs.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
+
 
 @Component({
   selector: 'app-edit',
@@ -13,10 +16,12 @@ import { switchMap } from 'rxjs/operators';
 export class EditComponent implements OnInit {
 
   tab!: Tab;
-
   
   constructor(private activatedRoute: ActivatedRoute,
-              private tabsService: TabsService) { }
+              private tabsService: TabsService,
+              private router: Router,
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -33,11 +38,31 @@ export class EditComponent implements OnInit {
 
   updateTab() {
     this.tabsService.updateTab(this.tab)
-      .subscribe(res => console.log(res));
+      .subscribe(res => this.showSnackBar('Tab updated!'));
   }
 
   deleteTab() {
-    this.tabsService.deleteTab(this.tab.id!)
-      .subscribe(res => console.log(res));
+    const dialog =  this.dialog.open( DialogComponent, {
+      width: '350px',
+      data: this.tab
+    });
+
+    dialog.afterClosed().subscribe(
+      (result) => {
+        if (result) {
+          this.tabsService.deleteTab(this.tab.id!)
+            .subscribe(res => {
+              this.router.navigate(['/tabs/list']);
+            }, err => console.log(err)
+          );
+        }
+      }
+    );
+  }
+
+  showSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 2500
+    });
   }
 }

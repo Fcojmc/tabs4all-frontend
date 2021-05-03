@@ -1,0 +1,22 @@
+<h1 style="text-align: center;">Are you sure?</h1>
+<hr>
+<p>
+    You are going to delete band {{data.name}}
+    <br>
+    Do you want to continue?
+</p>
+
+<div style="text-align: center;">
+    <button mat-raised-button 
+            color="warn" 
+            class="btn-mg-right"
+            (click)="delete()">
+        Yes, delete
+    </button>
+    <button mat-raised-button 
+            color="primary" 
+            class="btn-mg-left"
+            (click)="closeDialog()">
+        No, go back
+    </button>
+</div>

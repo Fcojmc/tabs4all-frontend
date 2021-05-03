@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../interfaces/user.interface';
-import { AuthService } from '../../auth/services/auth.service';
+import { UserService } from 'src/app/auth/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,14 +11,14 @@ export class DashboardComponent implements OnInit {
 
   userInfo!: User;
 
-  constructor(private authService: AuthService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.getInfo();
   }
 
   getInfo(){
-    this.authService.getUserInfo()
+    this.userService.getUserInfo()
       .subscribe( res => {
         this.userInfo = res;
       });

@@ -12,6 +12,7 @@ import { BandEditComponent } from './pages/band-edit/band-edit.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BandCardComponent } from './components/band-card/band-card.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { PipesModule } from '../pipes/pipes.module';
     BandViewComponent,
     CreateBandComponent,
     BandEditComponent,
-    BandCardComponent
+    BandCardComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,

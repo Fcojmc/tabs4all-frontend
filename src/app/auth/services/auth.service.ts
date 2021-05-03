@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -36,14 +36,14 @@ export class AuthService {
     localStorage.clear();
   }
 
-  getUserInfo(): Observable<User> {
-    const url = `${this.baseUrl}/my-info`;
-    return this.http.get<User>(url);
+
+  getFavouriteBands(): Observable<SuccessResponse> {
+    return this.http.get<SuccessResponse>(`${this.baseUrl}/user/favourite-bands`);
   }
 
-  isAdmin(): Observable<boolean | any> {
+  isAdmin(): Observable<any> {
     const url = `${this.baseUrl}/my-info`;
-    return this.http.get<boolean | any>(url)
+    return this.http.get<any>(url)
       .pipe(
         map( res => {
           if (res.is_admin === 1) {
@@ -64,9 +64,7 @@ export class AuthService {
     
     return this.http.get<boolean>(url)
       .pipe(
-        map( res => {
-          return true;
-        }),
+        map( res =>  true ),
         catchError((err)=> of(err.ok)) 
       );
   }

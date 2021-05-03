@@ -4,6 +4,9 @@ import { TabsService } from '../../services/tabs.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
 import { switchMap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/auth/services/user.service';
+
 
 @Component({
   selector: 'app-tab-view',
@@ -12,7 +15,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class TabViewComponent implements OnInit {
 
-  favorite: boolean = true;
+  favorite: boolean = false;
 
   tab!: Tab;
   
@@ -20,7 +23,9 @@ export class TabViewComponent implements OnInit {
 
   constructor(private tabsService: TabsService,
               private activatedRoute: ActivatedRoute,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private userService: UserService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -32,7 +37,7 @@ export class TabViewComponent implements OnInit {
       } 
     );
 
-    this.authService.getUserInfo()
+    this.userService.getUserInfo()
       .subscribe(res => {
         if (res.id === this.tab.user_id) {
           this.isAuthor = true;
@@ -44,8 +49,25 @@ export class TabViewComponent implements OnInit {
 
 
   setFavorite() {
+    let message: string;
+
+    if(this.favorite){
+      message = `You like ${this.tab.name} as favorite!`;
+    }
+
+    if(!this.favorite) {
+      message = `You don't like ${this.tab.name} anymore`;
+    }
+
     setTimeout(() => { 
       this.favorite = !this.favorite
+      this.showSnackBar(message);
     }, 300);
   } 
+
+  showSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 2500
+    });
+  }
 }

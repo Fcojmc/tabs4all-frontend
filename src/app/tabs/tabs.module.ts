@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TabCardComponent } from './components/tab-card/tab-card.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 
@@ -19,7 +20,8 @@ import { PipesModule } from '../pipes/pipes.module';
     CreateComponent,
     TabViewComponent,
     EditComponent,
-    TabCardComponent
+    TabCardComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,

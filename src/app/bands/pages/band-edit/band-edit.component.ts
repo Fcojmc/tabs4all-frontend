@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Band } from '../../../interfaces/band.interface';
 import { BandsService } from '../../services/bands.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 
 @Component({
@@ -22,7 +25,9 @@ export class BandEditComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private bandsService: BandsService,
-              private router: Router) { }
+              private router: Router,
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -46,14 +51,37 @@ export class BandEditComponent implements OnInit {
     }
     this.bandData.append('json', JSON.stringify(this.band));
     this.bandsService.updateBand(this.bandData)
-      .subscribe( res => console.log(res));
+      .subscribe( res => {
+        this.showSnackBar('Band updated');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1100);
+      }
+    );
   }
 
   deleteBand() {
-    this.bandsService.deleteBand(this.band.id!)
-      .subscribe( res => {
-        console.log(res)
-        this.router.navigate(['/bands/list']);
-      }, error => console.log(error));
+    const dialog =  this.dialog.open( DialogComponent, {
+      width: '350px',
+      data: this.band
+    });
+
+    dialog.afterClosed().subscribe(
+      (result) => {
+        if (result) {
+          this.bandsService.deleteBand(this.band.id!)
+            .subscribe( res => {
+              this.router.navigate(['/bands/list']);
+            }, error => console.log(error));
+        }
+      }
+    );
+  }
+
+  showSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 1000
+    });
   }
 }
+
