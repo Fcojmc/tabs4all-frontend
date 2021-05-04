@@ -1,0 +1,21 @@
+<div fxFlex="100"  fxLayout="column" class="title-box">
+    <div fxFlex="100" fxLayoutAlign="center" class="title">
+        <h2>My Tabs</h2>
+    </div>
+    <div fxLayout="row wrap"
+         fxLayout.xs="column"
+         fxLayoutAlign="center"
+         fxLayoutGap="20px"
+         class="content-box"
+         style="margin-bottom: 40px;">
+        
+        <div
+            fxFlex="20"
+            fxFlex.lg="20"
+            fxFlex.sm="40"
+            *ngFor="let tab of tabs">
+        
+        <app-card [userTab]="tab"></app-card>   
+        </div>
+    </div>    
+</div>

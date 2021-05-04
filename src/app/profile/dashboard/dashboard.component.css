@@ -1,3 +1,9 @@
 .title > h2 {
     margin-top: 15px;
 }
+
+@media (max-width: 959px) {
+    .images {
+        margin-top: 20px;
+    }
+} 

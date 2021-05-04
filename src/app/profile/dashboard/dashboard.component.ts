@@ -11,6 +11,8 @@ export class DashboardComponent implements OnInit {
 
   userInfo!: User;
 
+  optionSelected: string ="myTabs";
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -22,5 +24,9 @@ export class DashboardComponent implements OnInit {
       .subscribe( res => {
         this.userInfo = res;
       });
+  }
+
+  updateInfo() {
+    
   }
 }

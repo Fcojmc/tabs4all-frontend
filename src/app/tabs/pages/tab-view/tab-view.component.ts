@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Tab } from '../../../interfaces/tab.interface';
 import { TabsService } from '../../services/tabs.service';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../../auth/services/auth.service';
 import { switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/auth/services/user.service';
@@ -15,7 +14,7 @@ import { UserService } from 'src/app/auth/services/user.service';
 })
 export class TabViewComponent implements OnInit {
 
-  favorite: boolean = false;
+  isFavourite!: boolean;
 
   tab!: Tab;
   
@@ -23,7 +22,6 @@ export class TabViewComponent implements OnInit {
 
   constructor(private tabsService: TabsService,
               private activatedRoute: ActivatedRoute,
-              private authService: AuthService,
               private userService: UserService,
               private snackBar: MatSnackBar) { }
 
@@ -45,22 +43,35 @@ export class TabViewComponent implements OnInit {
       },
         err => console.log(err)
       );
+
+    this.userService.getFavouriteTabs()
+      .subscribe(res => {
+        console.log(res)
+        let favouriteTabs = res.data.map((tab: Tab) => tab.id);
+        if (favouriteTabs.includes(this.tab.id)) {
+          this.isFavourite = true;
+        } else {
+          this.isFavourite = false;
+        }
+      });
   }
 
 
   setFavorite() {
     let message: string;
 
-    if(this.favorite){
-      message = `You like ${this.tab.name} as favorite!`;
+    if(this.isFavourite) {
+      this.userService.unsetFavouriteTab(this.tab.id)
+        .subscribe( res => message = res.message);
     }
 
-    if(!this.favorite) {
-      message = `You don't like ${this.tab.name} anymore`;
+    if(!this.isFavourite) {
+      this.userService.setFavouriteTab(this.tab.id)
+      .subscribe( res => message = res.message); 
     }
 
     setTimeout(() => { 
-      this.favorite = !this.favorite
+      this.isFavourite = !this.isFavourite;
       this.showSnackBar(message);
     }, 300);
   } 

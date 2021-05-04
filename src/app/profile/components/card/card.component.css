@@ -1,0 +1,7 @@
+.band-img {
+    object-fit: cover;
+}
+
+mat-card {
+    margin-top: 20px;
+}

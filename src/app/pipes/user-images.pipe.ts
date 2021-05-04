@@ -7,7 +7,7 @@ import { User } from '../interfaces/user.interface';
 })
 export class UserImagesPipe implements PipeTransform {
 
-  transform(payload: any): string {
+  transform(payload: User): string {
     const baseUrl = environment.baseUrlImage;
     
     if (!payload.image) {

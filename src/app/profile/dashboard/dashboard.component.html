@@ -1,11 +1,58 @@
 <div fxLayout="row">
     <div fxFlex.xs="100" fxFlex.sm="90" fxFlex.gt-sm="80"  fxLayout.xs="column" class="title-box">
         <div fxLayout="row" fxLayoutAlign="center" class="title">
-            <h2>My info</h2>
+            <h2>My Profile</h2>
         </div>
 
-        <div fxLayout="column" fxLayout.gt-sm="row" class="content-box">
+        <div fxLayout.xs="column" fxLaytout.sm="column" fxLayout.gt-sm="row" class="content-box">
+            <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.gt-sm="60">
+                <div fxLayout="column" fxLayoutGap="25px">
+                    <mat-form-field appearance="fill">
+                        <mat-label>User Name</mat-label>
+                        <input matInput
+                        type="text"
+                        [(ngModel)]="userInfo.name"
+                        disabled>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput
+                        type="text"
+                        [(ngModel)]="userInfo.email"
+                        disabled>
+                    </mat-form-field>
+
+                    <div fxLayoutAlign="center">
+                        <button mat-raised-button color="primary" (click)="updateInfo()">Update</button>
+                    </div>
+                </div>
+            </div>
+
+            <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.gt-sm="40" fxLayoutAlign="center">
+                <div fxLayout="column">
+                    <div>
+                        <img [src]="userInfo | userImages" class="images">
+                    </div>
+                </div>
+            </div>
             
         </div>
+        
+        <div fxLayout="row" fxLayoutAlign="center" class="content-box">
+            <mat-button-toggle-group [(ngModel)]="optionSelected" fxLayoutAlign="center">
+                <mat-button-toggle value="myTabs">My tabs</mat-button-toggle>
+                <mat-button-toggle value="favBands">Favourite Bands</mat-button-toggle>
+                <mat-button-toggle value="favTabs">Favourite Tabs</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+
+        <app-my-tabs *ngIf="optionSelected === 'myTabs'"></app-my-tabs>
+
+        <app-fav-bands *ngIf="optionSelected === 'favBands'"></app-fav-bands>
+
+        <app-fav-tabs *ngIf="optionSelected === 'favTabs'"></app-fav-tabs>
     </div>
+
+    
 </div>
+
