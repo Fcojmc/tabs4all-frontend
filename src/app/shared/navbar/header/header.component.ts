@@ -11,10 +11,17 @@ export class HeaderComponent implements OnInit {
 
   @Output() sidenavToggle = new EventEmitter();
 
+  isLogged!: boolean;
+
   constructor(private router: Router,
               private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (this.authService.getToken()) {
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
+    }
   }
 
   onToggleSidenav() {
@@ -25,7 +32,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([`/${route}`]);
   }
 
-  logout() {
+  logout(route: string) {
     this.authService.logout();
+    this.router.navigate([`/${route}`]);
   }
 }

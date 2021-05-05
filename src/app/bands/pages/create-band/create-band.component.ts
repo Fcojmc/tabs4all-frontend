@@ -70,7 +70,8 @@ export class CreateBandComponent implements OnInit {
         if (this.errors.name) {
           this.errorName = this.errors.name[0];
         }
-    });
+      }
+    );
   }
 
 

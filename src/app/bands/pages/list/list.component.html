@@ -11,6 +11,20 @@
         <div fxFlex="100" fxLayoutAlign="center" class="title">
             <h2>Bands</h2>
         </div>
+        <div fxFlex="100"class="search-box">
+            <mat-form-field
+                fxLayoutAlign="center" 
+                class="search-field" 
+                appearance="fill">
+                <mat-label>Search</mat-label>
+                <input 
+                    matInput
+                    type="text"
+                    placeholder="Search bands..."
+                    [(ngModel)]="searchTerm"
+                    (input)="search(searchTerm)">
+            </mat-form-field>
+        </div>
         <div fxLayout="row wrap"
              fxLayout.xs="column"
              fxLayoutAlign="center"
@@ -29,3 +43,4 @@
         </div>    
     </div>
 </div>
+

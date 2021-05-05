@@ -33,4 +33,13 @@ export class BandsService {
   deleteBand(id: string): Observable<SuccessResponse> {
     return this.http.delete<SuccessResponse>(`${this.baseUrl}/bands/delete/${id}`);
   }
+
+  getSongsByBandId(id: string): Observable<SuccessResponse> {
+    return this.http.get<SuccessResponse>(`${this.baseUrl}/band/songs/${id}`);
+  }
+
+  loadSongsForBand(bandId: string, bandName: string): Observable<SuccessResponse> {
+    const band = { band_id: bandId, name: bandName };
+    return this.http.post<SuccessResponse>('http://localhost:8080/api/songs/create', band);
+  }
 }

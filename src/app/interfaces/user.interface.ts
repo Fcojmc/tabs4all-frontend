@@ -6,4 +6,6 @@ export interface User {
     password_confirmation?: string;
     image?:                 string;
     is_admin?:             boolean;
+    created_at?:              Date;
+    updated_at?:              Date;
 }

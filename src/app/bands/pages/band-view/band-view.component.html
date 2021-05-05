@@ -4,28 +4,23 @@
             <h2>{{band.name}}</h2>
         </div>
         <div fxLayout.gt-sm="row" fxLayout="column" fxFlex="100" class="content-box">
-            <div fxLayout="column"  fxFlex="60" style="border: solid red 5px;">
-                <ul>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                    <li>LINK</li>
-                </ul>               
+            <div fxLayout="column"  fxFlex="60">
+                <div fxLayoutAlign="center"
+                     class="songs-box"
+                     *ngFor="let song of pageSlice">
+                    <button fxFlex="40" mat-button (click)="goToSongster(song)">{{song.name}}</button>
+                </div>   
+                <mat-paginator [length]="songs.length"
+                               [pageSize]="10"
+                               (page)="onPageChange($event)">
+                </mat-paginator>     
             </div>
 
             <div fxLayout="column"  fxFlex="40">
                 <iframe [src]="band | youtubeVideo" height="300px" frameborder="0" allowfullscreen></iframe>
                 
                 <div fxLayoutAlign="center" class="btn-box">
-                    <button mat-icon-button class="btn-mg-right" (click)="setFavorite()" *ngIf="!isFavourite; else favoriteBtn">
+                    <button mat-icon-button class="btn-mg-right" [color]="color" (click)="setFavorite()" *ngIf="isLogged">
                         <mat-icon>favorite</mat-icon>
                     </button>
                     <button mat-raised-button 
@@ -39,10 +34,3 @@
         </div>
     </div>
 </div>
-
-
-<ng-template #favoriteBtn>
-    <button mat-icon-button color="primary"  (click)="setFavorite()" class="btn-mg-right">
-        <mat-icon>favorite</mat-icon>
-    </button>
-</ng-template>

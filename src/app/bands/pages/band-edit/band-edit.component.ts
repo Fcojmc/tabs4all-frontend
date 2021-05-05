@@ -23,6 +23,8 @@ export class BandEditComponent implements OnInit {
   
   bandData: FormData = new FormData();
 
+  bandHasSongs: boolean = false;
+
   constructor(private activatedRoute: ActivatedRoute,
               private bandsService: BandsService,
               private router: Router,
@@ -32,10 +34,13 @@ export class BandEditComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
       .pipe(
-        switchMap( ({ id }) => this.bandsService.getBandById(id) )
+        switchMap( ({ id }) => this.bandsService.getSongsByBandId(id) )
       )
-      .subscribe( band => {
-        this.band = band;
+      .subscribe( res=> {
+        this.band = res.data[0];
+        if (this.band.songs?.length == 0) {
+          this.bandHasSongs = true;
+        }
       } 
     );
   }
@@ -43,6 +48,14 @@ export class BandEditComponent implements OnInit {
   getImage(event: any) {
     this.imageName = event.target.files[0].name;
     this.imageFile = event.target.files[0];
+  }
+
+  loadSongs() {
+    this.bandsService.loadSongsForBand(this.band.id!, this.band.name)
+      .subscribe( res => {
+        this.showSnackBar('Loaded songs!');
+        this.bandHasSongs = false;
+      });
   }
 
   updateBand() {

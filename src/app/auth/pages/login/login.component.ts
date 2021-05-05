@@ -25,11 +25,11 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
               private formBuilder: FormBuilder,
               private router: Router) { 
-
-     
   }
 
   ngOnInit(): void {
+    
+
     this.loginForm = this.formBuilder.group({
       email: [null, Validators.required],
       password: [null, Validators.required]
@@ -49,6 +49,9 @@ export class LoginComponent implements OnInit {
         res => {
           this.isLogged.emit(true);
           this.router.navigate(['/profile']);
+          setTimeout(() => {
+            window.location.reload();
+          }, 200 );
         },
         error => {
           console.log(error)

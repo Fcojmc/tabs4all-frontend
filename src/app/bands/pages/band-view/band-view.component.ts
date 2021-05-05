@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { AuthService } from '../../../auth/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../auth/services/user.service';
+import { Song } from '../../../interfaces/song.interface';
 
 
 @Component({
@@ -19,8 +20,16 @@ export class BandViewComponent implements OnInit {
   
   band!: Band;
   
+  songs!: Song[];
+
   isAdmin!: boolean;
   
+  isLogged!: boolean;
+
+  color: string = '';
+
+  pageSlice!: any[];
+
   constructor(private bandsService: BandsService,
               private authService: AuthService,
               private userService: UserService,
@@ -30,13 +39,21 @@ export class BandViewComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
       .pipe(
-          switchMap( ({ id }) => this.bandsService.getBandById(id) )
+          switchMap( ({ id }) => this.bandsService.getSongsByBandId(id) )
       )
-      .subscribe( band => {
-        this.band = band;
+      .subscribe( res => {
+        this.band = res.data[0];
+        this.songs = this.band.songs!;
+        this.pageSlice = this.songs.slice(0, 10);
       } 
     ); 
-    
+
+    this.isLogged = false;
+
+    if (this.authService.getToken()) {
+      this.isLogged = true;
+    }
+
     this.authService.isAdmin()
       .subscribe( 
         res => this.isAdmin = true,
@@ -49,8 +66,10 @@ export class BandViewComponent implements OnInit {
           let favouritesBands = res.data.map((band: Band) => band.id);
           if (favouritesBands.includes(this.band.id)) {
             this.isFavourite = true;
+            this.color="primary"
           } else {
             this.isFavourite = false;
+            this.color = '';
           }
         }
       );
@@ -70,7 +89,14 @@ export class BandViewComponent implements OnInit {
     }
 
     setTimeout(() => { 
-      this.isFavourite = !this.isFavourite
+      this.isFavourite = !this.isFavourite;
+      
+      if (this.color === '') {
+        this.color = 'primary';
+      } else {
+        this.color = '';
+      }
+    
       this.showSnackBar(message);
     }, 300);
   } 
@@ -79,5 +105,18 @@ export class BandViewComponent implements OnInit {
     this.snackBar.open(message, 'Close', {
       duration: 2000
     });
+  }
+
+  goToSongster(song: Song) {
+    window.open(song.url);
+  }
+
+  onPageChange(event: any) {
+    const startIndex: number = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if (endIndex > this.songs.length) {
+      endIndex = this.songs.length;
+    }
+    this.pageSlice = this.songs.slice(startIndex, endIndex);
   }
 }

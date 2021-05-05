@@ -40,13 +40,11 @@ export class TabViewComponent implements OnInit {
         if (res.id === this.tab.user_id) {
           this.isAuthor = true;
         }
-      },
-        err => console.log(err)
-      );
+      }
+    );
 
     this.userService.getFavouriteTabs()
       .subscribe(res => {
-        console.log(res)
         let favouriteTabs = res.data.map((tab: Tab) => tab.id);
         if (favouriteTabs.includes(this.tab.id)) {
           this.isFavourite = true;

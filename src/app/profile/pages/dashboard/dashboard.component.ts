@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../interfaces/user.interface';
+import { User } from '../../../interfaces/user.interface';
 import { UserService } from 'src/app/auth/services/user.service';
 
 @Component({
@@ -26,7 +26,4 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  updateInfo() {
-    
-  }
 }

@@ -15,13 +15,19 @@ export class ListComponent implements OnInit {
 
   isAdmin!: boolean;
 
+  searchTerm!: string;
+
+  bandsFilter!: Band[];
+
   constructor(private bandsService: BandsService,
+
               private authService:  AuthService) { }
 
   ngOnInit(): void {
     this.bandsService.getBands()
       .subscribe(res => {
         this.bands = res.data.bands;
+        this.bandsFilter = [...this.bands];
       });
     
     this.authService.isAdmin()
@@ -29,6 +35,11 @@ export class ListComponent implements OnInit {
         res => this.isAdmin = true,
         error => this.isAdmin = false
       );
+  }
+
+  search(term: string) {
+    term = term.replace(/\b\w/g, l => l.toUpperCase());
+    this.bands = this.bandsFilter.filter(band => band.name.includes(term));
   }
 
 }

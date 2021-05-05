@@ -25,6 +25,11 @@ export class UserService {
     return this.http.get<SuccessResponse>(url);
   }
 
+  updateUserInfo(user: FormData): Observable<SuccessResponse> {
+    const url = `${this.baseUrl}/user/update`;
+    return this.http.post<SuccessResponse>(url, user);
+  }
+
   getFavouriteBands(): Observable<SuccessResponse> {
     return this.http.get<SuccessResponse>(`${this.baseUrl}/user/favourite-bands`);
   }
