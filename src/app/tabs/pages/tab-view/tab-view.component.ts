@@ -35,18 +35,7 @@ export class TabViewComponent implements OnInit {
       )
       .subscribe( res => {
         this.tab = res.data;
-        this.userService.getUserInfo()
-          .subscribe(res => {
-            this.user = res.data;
-            let userTabs = this.user.tabs.map((tab: Tab) => tab.uuid);
-            let favouriteTabs = this.user.favouriteTabs.map((tab: Tab) => tab.uuid);
-            if(userTabs.includes(this.tab.uuid)) {
-              this.isAuthor = true;
-            } 
-            if (favouriteTabs.includes(this.tab.uuid)) {
-              this.isFavourite = true;
-            } 
-          });
+        this.userDataCheck();
       } 
     );
   }
@@ -75,5 +64,20 @@ export class TabViewComponent implements OnInit {
     this.snackBar.open(message, 'Close', {
       duration: 2500
     });
+  }
+
+  userDataCheck() {
+    this.userService.getUserInfo()
+          .subscribe(res => {
+            this.user = res.data;
+            let userTabs = this.user.tabs.map((tab: Tab) => tab.uuid);
+            let favouriteTabs = this.user.favouriteTabs.map((tab: Tab) => tab.uuid);
+            if(userTabs.includes(this.tab.uuid)) {
+              this.isAuthor = true;
+            } 
+            if (favouriteTabs.includes(this.tab.uuid)) {
+              this.isFavourite = true;
+            } 
+          });
   }
 }

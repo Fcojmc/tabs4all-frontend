@@ -48,24 +48,7 @@ export class BandViewComponent implements OnInit {
         this.band = res.data;
         this.songs = this.band.songs!;
         this.pageSlice = this.songs.slice(0, 10);
-        this.userService.getUserInfo()
-          .subscribe(
-            res => {
-              this.user = res.data;
-              this.isLogged = true;
-              let favouritesBands = this.user.favouriteBands.map((band: Band) => band.uuid);
-              if (this.user.is_admin) {
-                this.isAdmin = true;
-              } 
-              if (favouritesBands.includes(this.band.uuid)) {
-                this.isFavourite = true;
-                this.color="primary"
-              } else {
-                this.isFavourite = false;
-                this.color = '';
-              } 
-            }
-          );
+        this.userDataCheck();
       } 
     ); 
 
@@ -115,5 +98,26 @@ export class BandViewComponent implements OnInit {
       endIndex = this.songs.length;
     }
     this.pageSlice = this.songs.slice(startIndex, endIndex);
+  }
+
+  userDataCheck() {
+    this.userService.getUserInfo()
+          .subscribe(
+            res => {
+              this.user = res.data;
+              this.isLogged = true;
+              let favouritesBands = this.user.favouriteBands.map((band: Band) => band.uuid);
+              if (this.user.is_admin) {
+                this.isAdmin = true;
+              } 
+              if (favouritesBands.includes(this.band.uuid)) {
+                this.isFavourite = true;
+                this.color="primary"
+              } else {
+                this.isFavourite = false;
+                this.color = '';
+              } 
+            }
+          );
   }
 }
