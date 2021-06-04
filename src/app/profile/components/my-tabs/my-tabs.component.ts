@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../auth/services/user.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Tab } from '../../../interfaces/tab.interface';
 
 @Component({
@@ -9,13 +8,13 @@ import { Tab } from '../../../interfaces/tab.interface';
 })
 export class MyTabsComponent implements OnInit {
 
-  tabs!: Tab[];
+  @Input() tabs!: Tab[];
 
-  constructor(private userService: UserService) { }
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.userService.getUserTabs()
-      .subscribe(res => this.tabs = res.data);
+
   }
 
 }

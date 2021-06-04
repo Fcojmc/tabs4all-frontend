@@ -1,11 +1,16 @@
+import { Band } from './band.interface';
+import { Tab } from './tab.interface';
+
 export interface User {
-    id?:                    string;
+    uuid?:                  string;
     name:                   string;
     email:                  string;
     password:               string;
-    password_confirmation?: string;
     image?:                 string;
     is_admin?:             boolean;
-    created_at?:              Date;
-    updated_at?:              Date;
+    createdAt?:               Date;
+    updatedAt?:               Date;
+    favouriteBands:         Band[];
+    favouriteTabs:           Tab[];
+    tabs:                    Tab[];
 }

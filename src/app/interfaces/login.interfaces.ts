@@ -4,9 +4,7 @@ export interface Login {
 }
 
 export interface LoginResponse {
-    status:     string;
-    message:    string;
-    data: null | { 
-        token:  string;
-    }
+    success:     boolean;
+    message:      string;
+    data:  null | string;
 }

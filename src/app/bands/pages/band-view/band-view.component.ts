@@ -7,6 +7,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../auth/services/user.service';
 import { Song } from '../../../interfaces/song.interface';
+import { User } from 'src/app/interfaces/user.interface';
 
 
 @Component({
@@ -20,9 +21,11 @@ export class BandViewComponent implements OnInit {
   
   band!: Band;
   
+  user!: User;
+
   songs!: Song[];
 
-  isAdmin!: boolean;
+  isAdmin: boolean = false;
   
   isLogged!: boolean;
 
@@ -39,52 +42,46 @@ export class BandViewComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
       .pipe(
-          switchMap( ({ id }) => this.bandsService.getSongsByBandId(id) )
+          switchMap( ({ id }) => this.bandsService.getBandById(id) )
       )
       .subscribe( res => {
-        this.band = res.data[0];
+        this.band = res.data;
         this.songs = this.band.songs!;
         this.pageSlice = this.songs.slice(0, 10);
+        this.userService.getUserInfo()
+          .subscribe(
+            res => {
+              this.user = res.data;
+              this.isLogged = true;
+              let favouritesBands = this.user.favouriteBands.map((band: Band) => band.uuid);
+              if (this.user.is_admin) {
+                this.isAdmin = true;
+              } 
+              if (favouritesBands.includes(this.band.uuid)) {
+                this.isFavourite = true;
+                this.color="primary"
+              } else {
+                this.isFavourite = false;
+                this.color = '';
+              } 
+            }
+          );
       } 
     ); 
 
-    this.isLogged = false;
 
-    if (this.authService.getToken()) {
-      this.isLogged = true;
-    }
-
-    this.authService.isAdmin()
-      .subscribe( 
-        res => this.isAdmin = true,
-        error => this.isAdmin = false
-    ); 
-
-    this.userService.getFavouriteBands()
-      .subscribe(
-        res => {
-          let favouritesBands = res.data.map((band: Band) => band.id);
-          if (favouritesBands.includes(this.band.id)) {
-            this.isFavourite = true;
-            this.color="primary"
-          } else {
-            this.isFavourite = false;
-            this.color = '';
-          }
-        }
-      );
   }
 
   setFavorite() {
     let message: string;
     
     if(this.isFavourite){
-      this.userService.unsetFavouriteBand(this.band.id)
+      this.userService.unsetFavouriteBand(this.band.uuid, this.user.uuid)
         .subscribe( res => message = res.message);
     }
 
     if(!this.isFavourite) {
-      this.userService.setFavouriteBand(this.band.id)
+      this.userService.setFavouriteBand(this.band.uuid, this.user.uuid)
       .subscribe( res => message = res.message); 
     }
 

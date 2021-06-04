@@ -23,7 +23,7 @@ export class BandEditComponent implements OnInit {
   
   bandData: FormData = new FormData();
 
-  bandHasSongs: boolean = false;
+  bandHasSongs: boolean = true;
 
   constructor(private activatedRoute: ActivatedRoute,
               private bandsService: BandsService,
@@ -34,12 +34,12 @@ export class BandEditComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
       .pipe(
-        switchMap( ({ id }) => this.bandsService.getSongsByBandId(id) )
+        switchMap( ({ id }) => this.bandsService.getBandById(id) )
       )
       .subscribe( res=> {
-        this.band = res.data[0];
+        this.band = res.data;
         if (this.band.songs?.length == 0) {
-          this.bandHasSongs = true;
+          this.bandHasSongs = false;
         }
       } 
     );
@@ -51,10 +51,10 @@ export class BandEditComponent implements OnInit {
   }
 
   loadSongs() {
-    this.bandsService.loadSongsForBand(this.band.id!, this.band.name)
+    this.bandsService.loadSongsForBand(this.band.uuid!)
       .subscribe( res => {
+        this.bandHasSongs = true;
         this.showSnackBar('Loaded songs!');
-        this.bandHasSongs = false;
       });
   }
 
@@ -62,8 +62,8 @@ export class BandEditComponent implements OnInit {
     if (this.imageFile) {
       this.bandData.append('image', this.imageFile);
     }
-    this.bandData.append('json', JSON.stringify(this.band));
-    this.bandsService.updateBand(this.bandData)
+    this.bandData.append('data', JSON.stringify(this.band));
+    this.bandsService.updateBand(this.bandData, this.band.uuid!)
       .subscribe( res => {
         this.showSnackBar('Band updated');
         setTimeout(() => {
@@ -82,7 +82,7 @@ export class BandEditComponent implements OnInit {
     dialog.afterClosed().subscribe(
       (result) => {
         if (result) {
-          this.bandsService.deleteBand(this.band.id!)
+          this.bandsService.deleteBand(this.band.uuid!)
             .subscribe( res => {
               this.router.navigate(['/bands/list']);
             }, error => console.log(error));

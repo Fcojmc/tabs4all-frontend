@@ -28,7 +28,7 @@ export class TabsService {
   }
 
   updateTab(tab: Tab): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${this.baseUrl}/tabs/update`, tab);
+    return this.http.put<SuccessResponse>(`${this.baseUrl}/tabs/update/${tab.uuid}`, tab);
   }
 
   deleteTab(id: string): Observable<SuccessResponse> {

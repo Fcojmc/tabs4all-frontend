@@ -15,8 +15,9 @@
             </mat-form-field>
             
             
-            <small *ngIf="error" class="field-error">{{errorMsg}}</small>
-    
+            <small *ngIf="loginError" class="field-error">{{errorMsg}}</small>
+            <small *ngIf="validatorError && !loginError" class="field-error">{{errorMsg}}</small>
+
             <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
                 <input matInput 
@@ -29,7 +30,7 @@
                 </mat-error>       
             </mat-form-field>
     
-            <small *ngIf="error" class="field-error">{{errorMsg}}</small>
+            <small *ngIf="loginError" class="field-error">{{errorMsg}}</small>
         </mat-card-content>
     
         

@@ -14,7 +14,9 @@ export class ListComponent implements OnInit {
   constructor(private tabsService: TabsService) { }
 
   ngOnInit(): void {
-    this.tabsService.getTabs().subscribe(res => this.tabs = res.data);
+    this.tabsService.getTabs().subscribe(res => {
+      this.tabs = res.data
+    });
   }
 
 }

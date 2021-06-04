@@ -18,15 +18,15 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   register(register: User): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${this.baseUrl}/auth/register`, register);
+    return this.http.post<SuccessResponse>(`${this.baseUrl}/users/register`, register);
   }
 
   login(login: Login): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/auth/login`, login)
     .pipe(
       tap(resp => {
-        if (resp.status === "Success") {
-          localStorage.setItem('token', resp.data!.token);
+        if (resp.success) {
+          localStorage.setItem('token', resp.data!);
         }
       })
     );
@@ -37,23 +37,9 @@ export class AuthService {
     window.location.reload();
   }
 
-
-  getFavouriteBands(): Observable<SuccessResponse> {
-    return this.http.get<SuccessResponse>(`${this.baseUrl}/user/favourite-bands`);
-  }
-
-  isAdmin(): Observable<any> {
-    const url = `${this.baseUrl}/my-info`;
-    return this.http.get<any>(url)
-      .pipe(
-        map( res => {
-          if (res.is_admin === 1) {
-            return true;
-          }
-          return false;
-        })
-      );
-      
+  isAdmin(): Observable<boolean> {
+    const url = `${this.baseUrl}/auth/admin-check`;
+    return this.http.get<boolean>(url)  
   }
 
   getToken(): string | null {
@@ -65,7 +51,7 @@ export class AuthService {
     
     return this.http.get<boolean>(url)
       .pipe(
-        map( res =>  true ),
+        map( res => true),
         catchError((err)=> of(err.ok)) 
       );
   }

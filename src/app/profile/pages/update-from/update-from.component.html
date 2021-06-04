@@ -44,7 +44,7 @@
                     <div>
                         <img [src]="userInfo | userImages" class="images">
                     </div>
-                    <small>Created: {{userInfo.created_at | date}}</small>
+                    <small>Created: {{userInfo.createdAt | date}}</small>
                     <button mat-raised-button (click)="selectFile.click()">Change image</button>
                     <input type="file" (change)="getImage($event)" style="display: none" #selectFile>
                 </div>

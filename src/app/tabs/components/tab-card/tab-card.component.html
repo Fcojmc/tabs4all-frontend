@@ -1,7 +1,7 @@
-<mat-card class="card" [routerLink]="['/tabs/', tab.id ]">
+<mat-card class="card" [routerLink]="['/tabs/', tab.uuid ]">
     <mat-card-header>
         <mat-card-title>{{tab.name}}</mat-card-title>
     </mat-card-header>
 
-    <img mat-card-image [src]="tab.users | userImages" class="tab-img">
+    <img mat-card-image src="../../../../assets/images/guitar.png" class="tab-img">
 </mat-card>

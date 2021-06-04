@@ -12,15 +12,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  @Output() isLogged = new EventEmitter();
+  loginError: boolean = false;
 
-  error: boolean = false;
-
-  errorMsg: string = '';
-
+  errorMsg!: string;
+  
   loginForm!: FormGroup;
 
   loginUser!: Login;
+
+  validatorError: boolean = false;
 
   constructor(private authService: AuthService,
               private formBuilder: FormBuilder,
@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-
     this.loginForm = this.formBuilder.group({
       email: [null, Validators.required],
       password: [null, Validators.required]
@@ -47,16 +45,20 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginUser)
       .subscribe(
         res => {
-          this.isLogged.emit(true);
-          this.router.navigate(['/profile']);
           setTimeout(() => {
             window.location.reload();
           }, 200 );
+          this.router.navigate(['/profile']);
         },
         error => {
-          console.log(error)
-          this.error = true;
-          this.errorMsg = error.error.message;
+          if (error.error.errors) {
+            this.loginError = false;
+            this.validatorError = true;
+            this.errorMsg = error.error.errors[0].msg;
+          } else {
+            this.loginError = true;
+            this.errorMsg = error.error.message;
+          }             
     });
   }
 }

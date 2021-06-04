@@ -33,7 +33,7 @@
                     </mat-form-field>
 
                     <div fxLayoutAlign="center">
-                        <button mat-raised-button class="btn-mg-right" (click)="loadSongs()" *ngIf="bandHasSongs">Load songs</button>
+                        <button mat-raised-button class="btn-mg-right" (click)="loadSongs()" *ngIf="!bandHasSongs">Load songs</button>
                         <button mat-raised-button color="primary" (click)="updateBand()" class="btn-mg-right btn-mg-left">Update</button>
                         <button mat-raised-button color="warn" (click)="deleteBand()" class="btn-mg-left">Delete</button>
                     </div>
@@ -46,7 +46,7 @@
                     <div>
                         <img [src]="band| bandImage" class="images">
                     </div>
-                    <small>Created: {{band.created_at | date}}</small>
+                    <small>Created: {{band.createdAt | date}}</small>
                     <button mat-raised-button (click)="selectFile.click()">Change image</button>
                     <input type="file" (change)="getImage($event)" style="display: none" #selectFile>
                 </div>

@@ -44,19 +44,6 @@
             
             <small *ngIf="error && errorPwd" class="field-error">{{errorPwd}}</small> 
 
-            <mat-form-field appearance="fill">
-                <mat-label>Password Confirmation</mat-label> 
-                <input matInput 
-                       type="password"
-                       placeholder="Password Confirmation" 
-                       formControlName="password_confirmation"
-                       required>
-                <mat-error>
-                    <span>This field is mandatory.</span>
-                </mat-error>       
-            </mat-form-field>
-
-            <small *ngIf="error && errorPwd" class="field-error">{{errorPwd}}</small>
         </mat-card-content>
     
         <mat-card-actions>

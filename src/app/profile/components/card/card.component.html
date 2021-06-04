@@ -1,4 +1,4 @@
-<mat-card class="card" [routerLink]="['/bands/', favBand.id ]" *ngIf="favBand">
+<mat-card class="card" [routerLink]="['/bands/', favBand.uuid ]" *ngIf="favBand">
     <mat-card-header>
         <mat-card-title>{{favBand.name}}</mat-card-title>
     </mat-card-header>
@@ -6,15 +6,15 @@
     <img mat-card-image [src]="favBand | bandImage" class="band-img">
 </mat-card>
 
-<mat-card class="card" [routerLink]="['/tabs/', favTab.id ]" *ngIf="favTab">
+<mat-card class="card" [routerLink]="['/tabs/', favTab.uuid ]" *ngIf="favTab">
     <mat-card-header>
         <mat-card-title>{{favTab.name}}</mat-card-title>
     </mat-card-header>
 
-    <img mat-card-image [src]="favTab.users | userImages" class="band-img">
+    <img mat-card-image src="../../../../assets/images/guitar.png" class="band-img">
 </mat-card>
 
-<mat-card class="card" [routerLink]="['/tabs/', userTab.id ]" *ngIf="userTab">
+<mat-card class="card" [routerLink]="['/tabs/', userTab.uuid ]" *ngIf="userTab">
     <mat-card-header>
         <mat-card-title>{{userTab.name}}</mat-card-title>
     </mat-card-header>

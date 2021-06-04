@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SuccessResponse } from 'src/app/interfaces/success-response.interface';
-import { User } from 'src/app/interfaces/user.interface';
 import { environment } from 'src/environments/environment';
 import { Favourites } from '../../interfaces/favourites.interface';
 
@@ -15,46 +14,34 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUserInfo(): Observable<User> {
-    const url = `${this.baseUrl}/my-info`;
-    return this.http.get<User>(url);
-  }
-
-  getUserTabs(): Observable<SuccessResponse> {
-    const url = `${this.baseUrl}/user/tabs`;
+  getUserInfo(): Observable<SuccessResponse> {
+    const url = `${this.baseUrl}/users/my-info`;
     return this.http.get<SuccessResponse>(url);
   }
 
-  updateUserInfo(user: FormData): Observable<SuccessResponse> {
-    const url = `${this.baseUrl}/user/update`;
-    return this.http.post<SuccessResponse>(url, user);
+  updateUserInfo(user: FormData, id: string): Observable<SuccessResponse> {
+    const url = `${this.baseUrl}/users/update/${id}`;
+    console.log(user)
+    return this.http.put<SuccessResponse>(url, user);
   }
 
-  getFavouriteBands(): Observable<SuccessResponse> {
-    return this.http.get<SuccessResponse>(`${this.baseUrl}/user/favourite-bands`);
+  setFavouriteBand(BandId: string | undefined, UserId: string | undefined): Observable<SuccessResponse> {
+    const favouriteBand: Favourites = { BandId, UserId };
+    return this.http.post<SuccessResponse>(`${this.baseUrl}/set-user-favourites/bands`, favouriteBand);
   }
 
-  getFavouriteTabs(): Observable<SuccessResponse> {
-    return this.http.get<SuccessResponse>(`${this.baseUrl}/user/favourite-tabs`);
+  unsetFavouriteBand(BandId: string | undefined, UserId: string | undefined): Observable<SuccessResponse> {
+    const favouriteBand: Favourites = { BandId, UserId };
+    return this.http.post<SuccessResponse>(`${this.baseUrl}/unset-user-favourites/bands`, favouriteBand);
   }
 
-  setFavouriteBand(id: string | undefined): Observable<SuccessResponse> {
-    const favouriteBand: Favourites = { band_id: id };
-    return this.http.post<SuccessResponse>(`${this.baseUrl}/user/set-favourite-band`, favouriteBand);
+  setFavouriteTab(TabId: string | undefined, UserId: string | undefined): Observable<SuccessResponse> {
+    const favouriteTab: Favourites = { TabId, UserId };
+    return this.http.post<SuccessResponse>(`${this.baseUrl}/set-user-favourites/tabs`, favouriteTab);
   }
 
-  unsetFavouriteBand(id: string | undefined): Observable<SuccessResponse> {
-    const favouriteBand: Favourites = { band_id: id};
-    return this.http.post<SuccessResponse>(`${this.baseUrl}/user/unset-favourite-band`, favouriteBand);
-  }
-
-  setFavouriteTab(id: string | undefined): Observable<SuccessResponse> {
-    const favouriteTab: Favourites = { tab_id: id };
-    return this.http.post<SuccessResponse>(`${this.baseUrl}/user/set-favourite-tab`, favouriteTab);
-  }
-
-  unsetFavouriteTab(id: string | undefined): Observable<SuccessResponse> {
-    const favouriteTab: Favourites = { tab_id: id };
-    return this.http.post<SuccessResponse>(`${this.baseUrl}/user/unset-favourite-tab`, favouriteTab);
+  unsetFavouriteTab(TabId: string | undefined, UserId: string | undefined): Observable<SuccessResponse> {
+    const favouriteTab: Favourites = { TabId, UserId };
+    return this.http.post<SuccessResponse>(`${this.baseUrl}/unset-user-favourites/tabs`, favouriteTab);
   }
 }

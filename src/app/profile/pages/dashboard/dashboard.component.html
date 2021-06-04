@@ -40,17 +40,17 @@
         
         <div fxLayout="row" fxLayoutAlign="center" class="content-box">
             <mat-button-toggle-group [(ngModel)]="optionSelected" fxLayoutAlign="center">
-                <mat-button-toggle value="myTabs">My tabs</mat-button-toggle>
-                <mat-button-toggle value="favBands">Favourite Bands</mat-button-toggle>
-                <mat-button-toggle value="favTabs">Favourite Tabs</mat-button-toggle>
+                <mat-button-toggle value="myTabs" (click)="loadInfo(myTabs)">My tabs</mat-button-toggle>
+                <mat-button-toggle value="favBands" (click)="loadInfo(favBands)">Favourite Bands</mat-button-toggle>
+                <mat-button-toggle value="favTabs" (click)="loadInfo(favTabs)">Favourite Tabs</mat-button-toggle>
             </mat-button-toggle-group>
         </div>
 
-        <app-my-tabs *ngIf="optionSelected === 'myTabs'"></app-my-tabs>
+        <app-my-tabs *ngIf="optionSelected === 'myTabs'" [tabs]="myTabs"></app-my-tabs>
 
-        <app-fav-bands *ngIf="optionSelected === 'favBands'"></app-fav-bands>
+        <app-fav-bands *ngIf="optionSelected === 'favBands'" [bands]="favBands"></app-fav-bands>
 
-        <app-fav-tabs *ngIf="optionSelected === 'favTabs'"></app-fav-tabs>
+        <app-fav-tabs *ngIf="optionSelected === 'favTabs'" [tabs]="favTabs"></app-fav-tabs>
     </div>
 
     

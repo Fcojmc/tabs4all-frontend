@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Band } from '../../../interfaces/band.interface';
-import { UserService } from '../../../auth/services/user.service';
 
 @Component({
   selector: 'app-fav-bands',
@@ -9,13 +8,12 @@ import { UserService } from '../../../auth/services/user.service';
 })
 export class FavBandsComponent implements OnInit {
 
-  bands!: Band[];
+  @Input() bands!: Band[];
 
-  constructor(private userService: UserService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.userService.getFavouriteBands()
-      .subscribe(res => this.bands = res.data);
+
   }
 
 }

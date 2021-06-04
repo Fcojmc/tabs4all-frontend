@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/auth/services/user.service';
+import { User } from 'src/app/interfaces/user.interface';
 
 
 @Component({
@@ -14,11 +15,13 @@ import { UserService } from 'src/app/auth/services/user.service';
 })
 export class TabViewComponent implements OnInit {
 
-  isFavourite!: boolean;
+  isFavourite: boolean = false;
+  
+  isAuthor: boolean = false;
 
   tab!: Tab;
   
-  isAuthor: boolean = false;
+  user!: User;
 
   constructor(private tabsService: TabsService,
               private activatedRoute: ActivatedRoute,
@@ -32,26 +35,20 @@ export class TabViewComponent implements OnInit {
       )
       .subscribe( res => {
         this.tab = res.data;
+        this.userService.getUserInfo()
+          .subscribe(res => {
+            this.user = res.data;
+            let userTabs = this.user.tabs.map((tab: Tab) => tab.uuid);
+            let favouriteTabs = this.user.favouriteTabs.map((tab: Tab) => tab.uuid);
+            if(userTabs.includes(this.tab.uuid)) {
+              this.isAuthor = true;
+            } 
+            if (favouriteTabs.includes(this.tab.uuid)) {
+              this.isFavourite = true;
+            } 
+          });
       } 
     );
-
-    this.userService.getUserInfo()
-      .subscribe(res => {
-        if (res.id === this.tab.user_id) {
-          this.isAuthor = true;
-        }
-      }
-    );
-
-    this.userService.getFavouriteTabs()
-      .subscribe(res => {
-        let favouriteTabs = res.data.map((tab: Tab) => tab.id);
-        if (favouriteTabs.includes(this.tab.id)) {
-          this.isFavourite = true;
-        } else {
-          this.isFavourite = false;
-        }
-      });
   }
 
 
@@ -59,12 +56,12 @@ export class TabViewComponent implements OnInit {
     let message: string;
 
     if(this.isFavourite) {
-      this.userService.unsetFavouriteTab(this.tab.id)
+      this.userService.unsetFavouriteTab(this.tab.uuid, this.user.uuid)
         .subscribe( res => message = res.message);
     }
 
     if(!this.isFavourite) {
-      this.userService.setFavouriteTab(this.tab.id)
+      this.userService.setFavouriteTab(this.tab.uuid, this.user.uuid)
       .subscribe( res => message = res.message); 
     }
 

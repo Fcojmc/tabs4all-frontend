@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { BandsService } from '../../services/bands.service';
 import { FormErrors } from '../../../interfaces/form-errors.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-band',
@@ -30,7 +31,8 @@ export class CreateBandComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private bandService: BandsService,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.createForm = this.formBuilder.group({
@@ -53,12 +55,15 @@ export class CreateBandComponent implements OnInit {
 
     this.newBand = this.createForm.value;
     this.bandData.append('image', this.imageFile);
-    this.bandData.append('json', JSON.stringify(this.newBand));
+    this.bandData.append('data', JSON.stringify(this.newBand));
 
     this.bandService.create(this.bandData)
       .subscribe( res => {
         this.error = false;
         this.showSnackBar('Band created!');
+        setTimeout(() => {
+          this.router.navigate(['/bands/list']);
+        }, 1000 );
       },
       error => {
         this.error = true;

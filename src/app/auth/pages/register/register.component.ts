@@ -34,8 +34,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       name: [null, Validators.required],
       email: [null, Validators.required],
-      password: [null, Validators.required],
-      password_confirmation: [null, Validators.required]
+      password: [null, Validators.required]
     });
   }
 
@@ -50,7 +49,6 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.newUser)
       .subscribe(
         res => {
-          console.log(res)
           this.router.navigate(['/auth/login']);
         },
         error => {

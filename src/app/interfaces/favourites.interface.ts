@@ -1,4 +1,5 @@
 export interface Favourites {
-    band_id?:  string | undefined;
-    tab_id?:   string | undefined;
+    BandId?:  string | undefined;
+    TabId?:   string | undefined;
+    UserId?:  string | undefined;
 }

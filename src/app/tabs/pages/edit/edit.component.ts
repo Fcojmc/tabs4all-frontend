@@ -50,7 +50,7 @@ export class EditComponent implements OnInit {
     dialog.afterClosed().subscribe(
       (result) => {
         if (result) {
-          this.tabsService.deleteTab(this.tab.id!)
+          this.tabsService.deleteTab(this.tab.uuid!)
             .subscribe(res => {
               this.router.navigate(['/tabs/list']);
             }, err => console.log(err)

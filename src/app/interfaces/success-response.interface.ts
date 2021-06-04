@@ -1,5 +1,5 @@
 export interface SuccessResponse {
-    status:     string;
+    success:      true;
     message:    string;
     data:          any; 
 }

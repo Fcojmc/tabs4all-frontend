@@ -22,12 +22,12 @@ export class BandsService {
     return this.http.get<SuccessResponse>(`${this.baseUrl}/bands/all`)
   }
 
-  getBandById(id: string): Observable<Band> {
-    return this.http.get<Band>(`${this.baseUrl}/bands/${id}`);
+  getBandById(id: string): Observable<SuccessResponse> {
+    return this.http.get<SuccessResponse>(`${this.baseUrl}/bands/${id}`);
   }
 
-  updateBand(band: FormData): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${this.baseUrl}/bands/update`, band);
+  updateBand(band: FormData, id: string): Observable<SuccessResponse> {
+    return this.http.put<SuccessResponse>(`${this.baseUrl}/bands/update/${id}`, band);
   }
 
   deleteBand(id: string): Observable<SuccessResponse> {
@@ -38,8 +38,7 @@ export class BandsService {
     return this.http.get<SuccessResponse>(`${this.baseUrl}/band/songs/${id}`);
   }
 
-  loadSongsForBand(bandId: string, bandName: string): Observable<SuccessResponse> {
-    const band = { band_id: bandId, name: bandName };
-    return this.http.post<SuccessResponse>('http://localhost:8080/api/songs/create', band);
+  loadSongsForBand(bandId: string): Observable<SuccessResponse> {
+    return this.http.get<SuccessResponse>(`http://localhost:8080/api/songs/scraper/${bandId}`);
   }
 }

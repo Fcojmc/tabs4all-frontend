@@ -26,15 +26,18 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.bandsService.getBands()
       .subscribe(res => {
-        this.bands = res.data.bands;
+        this.bands = res.data;
         this.bandsFilter = [...this.bands];
       });
     
     this.authService.isAdmin()
-      .subscribe( 
-        res => this.isAdmin = true,
-        error => this.isAdmin = false
-      );
+      .subscribe(
+        res => {
+          if (res != false){
+            this.isAdmin = true;
+          }
+        }, 
+        err => this.isAdmin = false);
   }
 
   search(term: string) {

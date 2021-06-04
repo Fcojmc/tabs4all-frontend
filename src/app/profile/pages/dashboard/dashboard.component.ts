@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from '../../../interfaces/user.interface';
 import { UserService } from 'src/app/auth/services/user.service';
+import { Band } from '../../../interfaces/band.interface';
+import { Tab } from '../../../interfaces/tab.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,9 +11,17 @@ import { UserService } from 'src/app/auth/services/user.service';
 })
 export class DashboardComponent implements OnInit {
 
+  @Output() info = new EventEmitter();
+
   userInfo!: User;
 
-  optionSelected: string ="myTabs";
+  favBands!: Band[];
+
+  favTabs!: Tab[];
+
+  myTabs!: Tab[];
+
+  optionSelected: string = "";
 
   constructor(private userService: UserService) { }
 
@@ -19,11 +29,17 @@ export class DashboardComponent implements OnInit {
     this.getInfo();
   }
 
-  getInfo(){
+  getInfo() {
     this.userService.getUserInfo()
       .subscribe( res => {
-        this.userInfo = res;
+        this.userInfo = res.data;
+        this.favBands = this.userInfo.favouriteBands;
+        this.favTabs = this.userInfo.favouriteTabs;
+        this.myTabs = this.userInfo.tabs;
       });
   }
 
+  loadInfo(infoType: any[]) {
+    this.info.emit(infoType);
+  }
 }

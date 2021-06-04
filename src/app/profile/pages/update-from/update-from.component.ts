@@ -24,7 +24,7 @@ export class UpdateFromComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUserInfo()
-      .subscribe(res => this.userInfo = res);
+      .subscribe(res => this.userInfo = res.data);
   }
 
   getImage(event: any) {
@@ -36,11 +36,9 @@ export class UpdateFromComponent implements OnInit {
     if (this.imageFile) {
       this.userData.append('image', this.imageFile);
     }
-    this.userData.append('json', JSON.stringify(this.userInfo));
-    console.log(this.userData)
-    this.userService.updateUserInfo(this.userData)
+    this.userData.append('data', JSON.stringify(this.userInfo));
+    this.userService.updateUserInfo(this.userData, this.userInfo.uuid!)
       .subscribe( res => {
-        console.log(res)
         this.showSnackBar('Your info has been updated');
         setTimeout(() => {
           window.location.reload();
